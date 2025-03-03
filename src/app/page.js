@@ -3,6 +3,8 @@ import { useState } from "react";
 import Input from "./ui/essentials/Input";
 import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
+import Header from "./ui/utilities/Header"; 
+import { useRouter } from "next/navigation"; 
 
 
 export default function Home() {
@@ -11,18 +13,29 @@ export default function Home() {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
+  const router = useRouter();
+
   return (
-    <div>
+    <>
+      <Header text={"Tus mandaditos"} router={router}/>
+
       <Title text="U mandaitos" />
+
       <Paragraph children={"Bienvenido a umandaditos"} />
+
       <Input
-      width="30%"
+        width="30%"
         label="Nombre"
         placeholder="Ingresa tu nombre"
         value={inputValue}
         onChange={handleInputChange}
         name="nombre"
       />
-    </div>
+
+      <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
+      {/* Este botón es para hacer pruebas de enrutamiento */}
+
+    </>
   );
 }
