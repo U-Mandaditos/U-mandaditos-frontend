@@ -3,6 +3,8 @@ import { useState } from "react";
 import Input from "./ui/essentials/Input";
 import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
+import Button from "./ui/essentials/Button";
+import DeliveryCard from "./ui/cards/DeliveryCard";
 
 
 export default function Home() {
@@ -12,7 +14,7 @@ export default function Home() {
     setInputValue(event.target.value);
   };
   return (
-    <div>
+    <div className="p-4">
       <Title text="U mandaitos" />
       <Paragraph children={"Bienvenido a umandaditos"} />
       <Input
@@ -23,6 +25,8 @@ export default function Home() {
         onChange={handleInputChange}
         name="nombre"
       />
+      <Button text={"Continuar"} width={"10%"}/>
+      <DeliveryCard />
     </div>
   );
 }
