@@ -13,12 +13,17 @@ export default function Home() {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
+  const router = useRouter();
+
   return (
     <div className="p-4">
       <Title text="U mandaitos" />
+
       <Paragraph children={"Bienvenido a umandaditos"} />
+
       <Input
-      width="30%"
+        width="30%"
         label="Nombre"
         placeholder="Ingresa tu nombre"
         value={inputValue}
