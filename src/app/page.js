@@ -30,11 +30,11 @@ export default function Home() {
 
   return (
     <>
-      <Header text={"Tus mandaditos"} router={router}/>
+      <Header text="U mandaditos" />
+      <div className="p-4">
+        <Title text="U mandaitos" />
 
-      <Title text="U mandaitos" />
-
-      <Paragraph children={"Bienvenido a umandaditos"} />
+        <Paragraph children={"Bienvenido a umandaditos"} />
 
       <Input
         width="30%"
@@ -54,9 +54,15 @@ export default function Home() {
 
       <LocationSelect text={location.text} optionList={location.optionList} />
 
-      <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
-      {/* Este botón es para hacer pruebas de enrutamiento */}
+        <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
+        {/* Este botón es para hacer pruebas de enrutamiento */}
 
+        <Button text={"Continuar"} width={"10%"}/>
+        <DeliveryCard />
+        <ChatMessage text={"Hola, Donde esta ubicado?"} hour={"12:00PM"} isMine={false}/>
+        <ChatMessage text={"Estoy por el polideportivo en el aula 402."} hour={"12:01PM"} isMine={true}/>
+        <ChatMessage text={"Listo."} hour={"12:03PM"} isMine={false}/>
+      </div>
     </>
   );
 }

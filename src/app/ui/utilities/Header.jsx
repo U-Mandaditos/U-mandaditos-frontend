@@ -18,5 +18,4 @@ export default function Header({text, router}){
             <Title size={"24px"} text={text} color={"black"} className={""} weight={"600"}/>
         </StyledFlexContainer>
     );
-
 };
