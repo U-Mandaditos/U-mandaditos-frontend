@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Button from "./ui/essentials/Button";
 import DeliveryCard from "./ui/cards/DeliveryCard";
 import ChatMessage from "./ui/utilities/ChatMessage";
+import AccessButton from "./ui/navigation/AccessButton";
 
 
 export default function Home() {
@@ -22,6 +23,11 @@ export default function Home() {
   return (
     <>
       <Header text="U mandaditos" />
+
+      <AccessButton icon={"sendMail"} text={"Tus mandaditos"}/>
+      <AccessButton icon={"runnerIcon2"} text={"Tus entregas"}/>
+      <AccessButton icon={"reviews"} text={"Tus reseñas"}/>
+
       <div className="p-4">
         <Title text="U mandaitos" />
 
