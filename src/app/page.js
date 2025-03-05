@@ -5,7 +5,6 @@ import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
 import Header from "./ui/utilities/Header"; 
 import { useRouter } from "next/navigation"; 
-import SendInput from "./ui/utilities/SendInput";
 import Button from "./ui/essentials/Button";
 import DeliveryCard from "./ui/cards/DeliveryCard";
 
@@ -21,6 +20,7 @@ export default function Home() {
 
   return (
     <>
+      <Header text="U mandaditos" />
       <div className="p-4">
         <Title text="U mandaitos" />
 
@@ -38,7 +38,6 @@ export default function Home() {
         <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
         {/* Este botón es para hacer pruebas de enrutamiento */}
 
-        <SendInput/>
         <Button text={"Continuar"} width={"10%"}/>
         <DeliveryCard />
       </div>
