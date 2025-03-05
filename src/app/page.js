@@ -16,8 +16,9 @@ import Button from "./ui/essentials/Button";
 import DeliveryCard from "./ui/cards/DeliveryCard";
 import ChatMessage from "./ui/utilities/ChatMessage";
 
-
 export default function Home() {
+  const router = useRouter();
+
   const [inputValue, setInputValue] = useState('');
 
 
