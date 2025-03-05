@@ -11,12 +11,14 @@ export const theme_orange = {
     foreground: "#363433",
     secondary: "#679693",
     tertiary: "#E8A65D", 
-    background: "#fffffff",
+    background: "#ffffff",
     lineColor: "#D9D9D9",
     secondaryText: "#928E8D",
     primaryLight: "#F7F1EC",
-    secondaryLight: "#E4EFEE"
+    secondaryLight: "#E4EFEE",
+    disabled: "#EBE5E2"
   },
+
   spacing: {
     0: '0px',
     1: '4px',
