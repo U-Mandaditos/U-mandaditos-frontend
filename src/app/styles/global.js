@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     ([key, value]) => `
     .m-${key} { margin: ${value}; }
     .p-${key} { padding: ${value}; }
+    .px-${key} {padding-right: ${value}; padding-left: ${value};}
     .mt-${key} { margin-top: ${value}; }
     .mb-${key} { margin-bottom: ${value}; }
     .ml-${key} { margin-left: ${value}; }
