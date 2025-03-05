@@ -27,17 +27,14 @@ const StyledDiv = styled.div`
         border-color: transparent ${(props) => ( props.isMine ? props.theme.colors.primary || '#D3624B' : props.theme.colors.secondaryLight || '#E4EFEE')} transparent transparent;
         transform: rotate(${(props) => ( props.isMine ? '100' : '85')}deg);
     }
-
-    .time-right {
-        position: relative;
-        z-index: 2;
-    }
 `;
 
 const StyledHour = styled.span`
     font-size: 12px;    
     float: right;
     weight: 400;
+    position: relative;
+    z-index: 2;
 `;
 
 export default function ChatMessage({ text, hour, isMine }) {
@@ -45,7 +42,7 @@ export default function ChatMessage({ text, hour, isMine }) {
         <>
             <StyledDiv isMine={isMine}>
                 <StyledText>{text}</StyledText>
-                <StyledHour className="time-right">{hour}</StyledHour>
+                <StyledHour>{hour}</StyledHour>
             </StyledDiv>
         </>    
     );
