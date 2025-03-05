@@ -6,6 +6,8 @@ import Paragraph from "./ui/essentials/Paragraph";
 import Header from "./ui/utilities/Header"; 
 import { useRouter } from "next/navigation"; 
 import SendInput from "./ui/utilities/SendInput";
+import Button from "./ui/essentials/Button";
+import DeliveryCard from "./ui/cards/DeliveryCard";
 
 
 export default function Home() {
@@ -19,26 +21,27 @@ export default function Home() {
 
   return (
     <>
-      <Header text={"Tus mandaditos"} router={router}/>
+      <div className="p-4">
+        <Title text="U mandaitos" />
 
-      <Title text="U mandaitos" />
+        <Paragraph children={"Bienvenido a umandaditos"} />
 
-      <Paragraph children={"Bienvenido a umandaditos"} />
+        <Input
+          width="30%"
+          label="Nombre"
+          placeholder="Ingresa tu nombre"
+          value={inputValue}
+          onChange={handleInputChange}
+          name="nombre"
+        />
 
-      <Input
-        width="30%"
-        label="Nombre"
-        placeholder="Ingresa tu nombre"
-        value={inputValue}
-        onChange={handleInputChange}
-        name="nombre"
-      />
+        <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
+        {/* Este botón es para hacer pruebas de enrutamiento */}
 
-      <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
-      {/* Este botón es para hacer pruebas de enrutamiento */}
-
-      <SendInput/>
-
+        <SendInput/>
+        <Button text={"Continuar"} width={"10%"}/>
+        <DeliveryCard />
+      </div>
     </>
   );
 }

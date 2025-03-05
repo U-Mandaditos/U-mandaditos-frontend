@@ -15,7 +15,8 @@ export const theme_orange = {
     lineColor: "#D9D9D9",
     secondaryText: "#928E8D",
     primaryLight: "#F7F1EC",
-    secondaryLight: "#E4EFEE"
+    secondaryLight: "#E4EFEE",
+    main: "#FFFFFF"
   },
   spacing: {
     0: '0px',
