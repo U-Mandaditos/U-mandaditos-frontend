@@ -26,7 +26,6 @@ export default function Home() {
     setInputValue(event.target.value);
   };
 
-  const router = useRouter();
 
   return (
     <>
