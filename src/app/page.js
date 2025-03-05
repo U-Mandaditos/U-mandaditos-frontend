@@ -11,6 +11,10 @@ import ReviewCard from "./ui/cards/ReviewCard";
 import SendInput from "./ui/utilities/SendInput";
 import LocationSelect from "./ui/utilities/LocationSelect";
 import { review, user, location } from "../../data";
+import AccessButton from "./ui/navigation/AccessButton";
+import Button from "./ui/essentials/Button";
+import DeliveryCard from "./ui/cards/DeliveryCard";
+import ChatMessage from "./ui/utilities/ChatMessage";
 
 
 export default function Home() {
@@ -34,6 +38,7 @@ export default function Home() {
       <AccessButton icon={"sendMail"} text={"Tus mandaditos"}/>
       <AccessButton icon={"runnerIcon2"} text={"Tus entregas"}/>
       <AccessButton icon={"reviews"} text={"Tus reseñas"}/>
+
 
       <div className="p-4">
         <Title text="U mandaitos" />
