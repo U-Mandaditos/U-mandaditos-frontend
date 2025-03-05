@@ -3,6 +3,8 @@ import { useState } from "react";
 import Input from "./ui/essentials/Input";
 import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
+import Header from "./ui/utilities/Header"; 
+import { useRouter } from "next/navigation"; 
 import Button from "./ui/essentials/Button";
 import DeliveryCard from "./ui/cards/DeliveryCard";
 
@@ -17,21 +19,28 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="p-4">
-      <Title text="U mandaitos" />
+    <>
+      <Header text="U mandaditos" />
+      <div className="p-4">
+        <Title text="U mandaitos" />
 
-      <Paragraph children={"Bienvenido a umandaditos"} />
+        <Paragraph children={"Bienvenido a umandaditos"} />
 
-      <Input
-        width="30%"
-        label="Nombre"
-        placeholder="Ingresa tu nombre"
-        value={inputValue}
-        onChange={handleInputChange}
-        name="nombre"
-      />
-      <Button text={"Continuar"} width={"10%"}/>
-      <DeliveryCard />
-    </div>
+        <Input
+          width="30%"
+          label="Nombre"
+          placeholder="Ingresa tu nombre"
+          value={inputValue}
+          onChange={handleInputChange}
+          name="nombre"
+        />
+
+        <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
+        {/* Este botón es para hacer pruebas de enrutamiento */}
+
+        <Button text={"Continuar"} width={"10%"}/>
+        <DeliveryCard />
+      </div>
+    </>
   );
 }

@@ -7,6 +7,6 @@ export default function BackButton({router, width, heigth}){
     };
 
     return (
-        <img onClick={handleGoBack} style={{width: width, height: heigth}} src="/img/arrow.svg" alt="arrow" />
+        <img onClick={handleGoBack} style={{width: width, height: heigth, borderRadius: "50%"}} src="/img/arrow.svg" alt="arrow" />
     );
 }
