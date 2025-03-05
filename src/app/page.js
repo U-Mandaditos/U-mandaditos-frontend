@@ -7,6 +7,7 @@ import Header from "./ui/utilities/Header";
 import { useRouter } from "next/navigation"; 
 import Button from "./ui/essentials/Button";
 import DeliveryCard from "./ui/cards/DeliveryCard";
+import ChatMessage from "./ui/utilities/ChatMessage";
 
 
 export default function Home() {
@@ -40,6 +41,9 @@ export default function Home() {
 
         <Button text={"Continuar"} width={"10%"}/>
         <DeliveryCard />
+        <ChatMessage text={"Hola, Donde esta ubicado?"} hour={"12:00PM"} isMine={false}/>
+        <ChatMessage text={"Estoy por el polideportivo en el aula 402."} hour={"12:01PM"} isMine={true}/>
+        <ChatMessage text={"Listo."} hour={"12:03PM"} isMine={false}/>
       </div>
     </>
   );
