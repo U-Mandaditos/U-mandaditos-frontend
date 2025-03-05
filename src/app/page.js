@@ -5,6 +5,7 @@ import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
 import Header from "./ui/utilities/Header"; 
 import { useRouter } from "next/navigation"; 
+import SendInput from "./ui/utilities/SendInput";
 
 
 export default function Home() {
@@ -35,6 +36,8 @@ export default function Home() {
 
       <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
       {/* Este botón es para hacer pruebas de enrutamiento */}
+
+      <SendInput/>
 
     </>
   );
