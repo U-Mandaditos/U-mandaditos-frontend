@@ -15,6 +15,8 @@ import DeliveryCard from "./ui/cards/DeliveryCard";
 
 
 export default function Home() {
+  const router = useRouter();
+
   const [inputValue, setInputValue] = useState('');
 
 
@@ -31,6 +33,12 @@ export default function Home() {
   return (
     <>
       <Header text="U mandaditos" />
+
+      <AccessButton icon={"sendMail"} text={"Tus mandaditos"}/>
+      <AccessButton icon={"runnerIcon2"} text={"Tus entregas"}/>
+      <AccessButton icon={"reviews"} text={"Tus reseñas"}/>
+
+
       <div className="p-4">
         <Title text="U mandaitos" />
 
