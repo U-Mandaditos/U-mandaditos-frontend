@@ -27,12 +27,10 @@ const Bar = styled.div`
   border-radius: 5px;
 `;
 
-const LoadingBar = ({move}) => {
+export default function LoadingBar () {
   return (
     <BarContainer>
       <Bar />
     </BarContainer>
   );
 };
-
-export default LoadingBar;
