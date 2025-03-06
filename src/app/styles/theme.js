@@ -11,7 +11,7 @@ export const theme_orange = {
     foreground: "#363433",
     secondary: "#679693",
     tertiary: "#E8A65D", 
-    background: "#ffffff",
+    main: "#ffffff",
     lineColor: "#D9D9D9",
     secondaryText: "#928E8D",
     primaryLight: "#F7F1EC",

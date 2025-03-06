@@ -3,6 +3,7 @@ import { FlexContainer } from '../essentials/FlexBox';
 import RunnerIcon from "/public/img/runner-icon.svg";
 import Next from "/public/img/play-arrow.svg";
 import Location from "/public/img/location-icon.svg";
+import Button from '../essentials/Button';
 
 const ContainerGeneral = styled.div`
     width: auto;
@@ -14,6 +15,7 @@ const ContainerGeneral = styled.div`
     flex-direction: row;
     padding: 10px 10px 0 10px;
 `;
+
 
 const Icon = styled.svg`
   width: ${(props) => props.width || '14px'};
@@ -66,7 +68,7 @@ const StatusCard = styled.div`
 `;
 
 
-export default function DeliveryCard ({}) {
+export default function DeliveryCard ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, runnerName, status, price, ActionButton }) {
     const theme = useTheme();
     return (
         <ContainerGeneral>
@@ -76,28 +78,32 @@ export default function DeliveryCard ({}) {
                     <Icon as={Next} width="5px"></Icon>
                     <Card>
                         <Icon as={Location} width="10px" color={theme.colors.main}/>
-                        B2
+                        {pickUpLocation}
                     </Card>
                     <Icon as={Next} width="5px"></Icon>
                     <Card color={theme.colors.tertiary}>
                         <Icon as={Location} width="10px" color={theme.colors.main}/>
-                        Polideportivo
+                        {deliveryLocation}
                     </Card>
                 </FlexContainer>
                 <FlexContainer direction="row" gap="4px">
                     <TextCard weight="500">Mandadito:</TextCard>
-                    <TextCard>Alitas del CC</TextCard>
+                    <TextCard>{deliveryTitle}</TextCard>
                 </FlexContainer>
                 <FlexContainer direction="row" gap="4px">
                     <TextCard weight="500">Entrega:</TextCard>
-                    <TextCard>Angel Fernando Castillo</TextCard>
+                    <TextCard>{runnerName}</TextCard>
                 </FlexContainer>
-                <StatusCard status={2}>En progreso</StatusCard>
+                <StatusCard status={status}>{status===1? 'En porgreso': 'En espera'}</StatusCard>
 
             </FlexContainer>
             <FlexContainer direction="column" alignitems="flex-end" gap="3px">
-                <TextCard color={theme.colors.foreground} weight="500" size="16px">3:23 pm</TextCard>
-                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">L 20.00</TextCard>
+                <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour}</TextCard>
+                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{price}</TextCard>
+                <FlexContainer alignitems="flex-end" justifycontent="flex-end" height="100%">
+                    <Button text={"Ver"} width={"58%"} paddingx={"8px"} paddingy={"4px"} fontSize={"10px"} height="50%" className={"mb-3"}></Button>
+                </FlexContainer>
+                
             </FlexContainer>
 
         </ContainerGeneral>

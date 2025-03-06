@@ -11,6 +11,7 @@ import ReviewCard from "./ui/cards/ReviewCard";
 import SendInput from "./ui/utilities/SendInput";
 import LocationSelect from "./ui/utilities/LocationSelect";
 import { review, user, location } from "../../data";
+import DeliveryCard from "./ui/cards/DeliveryCard";
 
 
 export default function Home() {
@@ -44,23 +45,8 @@ export default function Home() {
         name="nombre"
       />
 
-      <IconButton onClick={() => router.push('/about')}  icon={'arrow_back.svg'} disabled={true} hover={false} />
-      <OfferCard postUser={user.postUser} offerInfo={user.offerInfo} priceSuggested={user.priceSuggested} isSelected={user.isSelected} />
 
-      <ReviewCard postUser={review.postUser} coment={review.coment} comentDate={review.comentDate} isPosted={review.isPosted} isSelected={review.isSelected}/>
-
-      <SendInput sendAction={sendAction}/>
-
-      <LocationSelect text={location.text} optionList={location.optionList} />
-
-        <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
-        {/* Este botón es para hacer pruebas de enrutamiento */}
-
-        <Button text={"Continuar"} width={"10%"}/>
-        <DeliveryCard />
-        <ChatMessage text={"Hola, Donde esta ubicado?"} hour={"12:00PM"} isMine={false}/>
-        <ChatMessage text={"Estoy por el polideportivo en el aula 402."} hour={"12:01PM"} isMine={true}/>
-        <ChatMessage text={"Listo."} hour={"12:03PM"} isMine={false}/>
+<DeliveryCard />
       </div>
     </>
   );
