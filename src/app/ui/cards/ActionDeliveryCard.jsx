@@ -9,7 +9,7 @@ const ContainerGeneral = styled.div`
     height: min-content;
     border-radius: 10px;
     border: 1px solid ${(props) => props.theme.colors.lineColor};
-    background-color: ${(props) => props.color || 'transparent'};
+    background-color: ${(props) => props.isSelected?  props.theme.colors.secondaryLight: props.theme.colors.main};
     display: flex;
     flex-direction: row;
     padding: 10px;
@@ -19,12 +19,10 @@ const OutContainer = styled.div`
     width: auto;
     height: min-content;
     border-radius: 10px;
-    border: 1px solid ${(props) => props.theme.colors.lineColor};
-    background-color: transparent;
+    background-color: ${(props) => props.theme.colors.secondary};
     display: flex;
     flex-direction: column;
 `;
-
 
 const Icon = styled.svg`
   width: ${(props) => props.width || '14px'};
@@ -56,15 +54,19 @@ const TextCard = styled.span`
     white-space: ${(props) => props.inline === 'yes'? 'nowrap': 'normal'};
 `;
 
+const SecondContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    border-radius: 10px;
+`;
 
-
-export default function PostDeliveryCard ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, bottomText, isSelected, onClick }) {
+export default function ActionDeliveryCa ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, isSelected, onClick }) {
     const theme = useTheme();
     return (
         <>
-        {bottomText? (
-            <OutContainer onClick={onClick} color={theme.colors.secondaryLight}>
-                <ContainerGeneral>
+            <OutContainer onClick={onClick}>
+                <ContainerGeneral isSelected={isSelected}>
                     <FlexContainer width={"75%"} height="100%" direction="column" gap="2px">
                         <FlexContainer height="auto" direction="row" alignitems="center" gap="5px" className='mb-2'>
                             <Icon as={RunnerIcon}></Icon>
@@ -91,47 +93,15 @@ export default function PostDeliveryCard ({idDelivery, pickUpLocation, deliveryL
                     <FlexContainer direction="column" alignitems="flex-end" gap="3px" width="auto">
                         <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour }</TextCard>
                         <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{price}</TextCard>
-                        
                     </FlexContainer>
 
                 </ContainerGeneral>
-            <FlexContainer direction="row" gap="6px" height="50%" className='p-2'>
-                <TextCard weight="500" inline="yes" color={theme.colors.primary} size="14px">Contraoferta:</TextCard>
-                <TextCard weight="500" color={theme.colors.foreground} size="14px">{price}</TextCard>
-            </FlexContainer>
-        </OutContainer>): (
-            <ContainerGeneral color={isSelected? theme.colors.secondaryLight: 'transparent'} onClick={onClick}>
-            <FlexContainer width={"75%"} height="100%" direction="column" gap="2px">
-                <FlexContainer height="auto" direction="row" alignitems="center" gap="5px" className='mb-2'>
-                    <Icon as={RunnerIcon}></Icon>
-                    <Icon as={Next} width="5px"></Icon>
-                    <Card>
-                        <Icon as={Location} width="10px" color={theme.colors.main}/>
-                        {pickUpLocation}
-                    </Card>
-                    <Icon as={Next} width="5px"></Icon>
-                    <Card color={theme.colors.tertiary}>
-                        <Icon as={Location} width="10px" color={theme.colors.main}/>
-                        {deliveryLocation}
-                    </Card>
-                </FlexContainer>
-                <FlexContainer direction="row" gap="4px">
-                    <TextCard weight="500">{deliveryTitle}</TextCard>
-                </FlexContainer>
-                <FlexContainer direction="row" gap="4px">
-                    <TextCard weight="500" inline="yes">Publicado por:</TextCard>
-                    <TextCard>{posterName}</TextCard>
-                </FlexContainer>
-
-            </FlexContainer>
-            <FlexContainer direction="column" alignitems="flex-end" gap="3px" width="auto">
-                <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour }</TextCard>
-                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{price}</TextCard>
-                
-            </FlexContainer>
-
-        </ContainerGeneral>
-        )}
+                {isSelected && (
+                    <SecondContainer className='p-2'>
+                        <TextCard weight="500" inline="yes" color={theme.colors.main} size="14px">¿Quiere hacer una contraoferta?</TextCard>
+                    </SecondContainer>
+                )}
+            </OutContainer>
         </>
     )
 }

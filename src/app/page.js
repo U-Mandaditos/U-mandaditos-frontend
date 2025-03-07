@@ -5,8 +5,8 @@ import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
 import Header from "./ui/utilities/Header"; 
 import { useRouter } from "next/navigation"; 
-import DeliveryCard from "./ui/cards/DeliveryCard";
 import PostDeliveryCard from "./ui/cards/PostDeliveryCard";
+import ActionDeliveryCard from "./ui/cards/ActionDeliveryCard";
 
 
 export default function Home() {
@@ -44,8 +44,8 @@ export default function Home() {
         name="nombre"
       />
 
-
 <PostDeliveryCard />
+<ActionDeliveryCard pickUpLocation={"B2"} deliveryHour={"3:00 pm"} deliveryLocation={"Polideportivo"} deliveryTitle={"Alitas del CC"} posterName={"Angel Castillo"} price={"L 20.00"} isSelected={true} />
       </div>
     </>
   );
