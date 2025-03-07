@@ -4,6 +4,7 @@ import RunnerIcon from "/public/img/runner-icon.svg";
 import Next from "/public/img/play-arrow.svg";
 import Location from "/public/img/location-icon.svg";
 
+
 const ContainerGeneral = styled.div`
     width: auto;
     height: min-content;

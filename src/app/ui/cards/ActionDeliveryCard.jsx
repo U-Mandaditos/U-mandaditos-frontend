@@ -3,6 +3,7 @@ import { FlexContainer } from '../essentials/FlexBox';
 import RunnerIcon from "/public/img/runner-icon.svg";
 import Next from "/public/img/play-arrow.svg";
 import Location from "/public/img/location-icon.svg";
+import Acces from "/public/img/acces-arrow.svg"
 
 const ContainerGeneral = styled.div`
     width: auto;
@@ -57,11 +58,13 @@ const TextCard = styled.span`
 const SecondContainer = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     height: 50%;
     border-radius: 10px;
 `;
 
-export default function ActionDeliveryCa ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, isSelected, onClick }) {
+export default function ActionDeliveryCard ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, isSelected, onClick }) {
     const theme = useTheme();
     return (
         <>
@@ -99,6 +102,7 @@ export default function ActionDeliveryCa ({idDelivery, pickUpLocation, deliveryL
                 {isSelected && (
                     <SecondContainer className='p-2'>
                         <TextCard weight="500" inline="yes" color={theme.colors.main} size="14px">¿Quiere hacer una contraoferta?</TextCard>
+                        <Icon color={theme.colors.main} as={Acces} width="9px"/>
                     </SecondContainer>
                 )}
             </OutContainer>
