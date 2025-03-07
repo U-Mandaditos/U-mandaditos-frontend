@@ -7,6 +7,8 @@ import Header from "./ui/utilities/Header";
 import { useRouter } from "next/navigation"; 
 import IconButton from "./ui/buttons/IconButton";
 import OfferCard from "./ui/cards/OfferCard";
+
+
 import ReviewCard from "./ui/cards/ReviewCard";
 import SendInput from "./ui/utilities/SendInput";
 import LocationSelect from "./ui/utilities/LocationSelect";
@@ -56,8 +58,9 @@ export default function Home() {
 
       <IconButton onClick={() => router.push('/about')}  icon={'arrow_back.svg'} disabled={true} hover={false} />
       <OfferCard postUser={user.postUser} offerInfo={user.offerInfo} priceSuggested={user.priceSuggested} isSelected={user.isSelected} />
-
+      <br />
       <ReviewCard postUser={review.postUser} coment={review.coment} comentDate={review.comentDate} isPosted={review.isPosted} isSelected={review.isSelected}/>
+      <br />
 
       <SendInput sendAction={sendAction}/>
 

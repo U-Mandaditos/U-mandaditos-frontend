@@ -7,7 +7,7 @@ const ReviewCardContainer = styled.div`
     font-size: 1rem;
     background-color: ${(props) => (props.isSelected ? '#e4efee' : props.theme.colors.main)};
     border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
     position: relative;
 `;
 
@@ -35,7 +35,6 @@ const UserInfo = styled.section`
     flex-direction: column;
     font-size: 1.3rem;
     font-weight: bold;
-    gap: 5px;
 `;
 
 const CommentContainer = styled.p`
