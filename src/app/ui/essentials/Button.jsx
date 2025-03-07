@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
   width: ${(props) => props.width || 'auto'};
-  padding: ${(props) => `${props.paddingY || '10px'} ${props.paddingx || '20px'}`};
-  font-size: 16px;
+  height: ${(props) => props.height || 'auto'};
+  padding: ${(props) => `${props.paddingy || '10px'} ${props.paddingx || '20px'}`};
+  font-size: ${(props) => props.fontSize || '16px'};
   font-weight: 500;
   font-family: ${(props) => props.theme.typography.fontFamily};
   border: none;
@@ -34,20 +35,24 @@ export default function Button({
   type = 'button',
   disabled = false,
   paddingx,
-  paddingY,
-  className
+  paddingy,
+  className,
+  fontSize,
+  height
 }) {
   return (
     <StyledButton
       width={width}
       paddingx={paddingx}
-      paddingY={paddingY}
+      paddingy={paddingy}
       color={color}
       textColor={textColor}
       type={type}
       disabled={disabled}
       onClick={onClick}
       className={className}
+      fontSize={fontSize}
+      height={height}
     >
       {text || value} 
     </StyledButton>
