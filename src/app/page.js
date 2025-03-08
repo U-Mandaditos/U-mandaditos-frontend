@@ -7,6 +7,7 @@ import Header from "./ui/utilities/Header";
 import { useRouter } from "next/navigation"; 
 import IconButton from "./ui/buttons/IconButton";
 import OfferCard from "./ui/cards/OfferCard";
+import ChatMessage from "./ui/utilities/ChatMessage";
 
 
 import ReviewCard from "./ui/cards/ReviewCard";
