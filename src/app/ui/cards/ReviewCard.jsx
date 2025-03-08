@@ -7,7 +7,6 @@ const ReviewCardContainer = styled.div`
     font-size: 1rem;
     background-color: ${(props) => (props.isSelected ? '#e4efee' : props.theme.colors.main)};
     border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     position: relative;
 `;
 
@@ -56,7 +55,7 @@ const DateParagraph = styled.p`
 `;
 
 const PostParagraph = styled.p`
-    color: ${(props) => props.isPosted ? props.theme.colors.primary : props.theme.colors.secondaryText };
+    color: ${(props) => props.isPosted ? props.theme.colors.primary : props.theme.colors.secondary};
     margin-top: auto;
     font-size: .9rem;
     font-weight: bold;
