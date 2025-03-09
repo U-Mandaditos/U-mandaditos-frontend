@@ -9,7 +9,7 @@ width: ${(props) => props.width || '100%'};
 
 const InputLabel = styled.label`
   font-size: 15px;
-  color: ${(props) => props.theme.colors.foreground || '#000'};
+  color: ${(props) => props.color || props.theme.colors.foreground || '#000'};
   margin-bottom: 8px;
   font-weight: 500;
 `;
@@ -34,10 +34,10 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function Input({ width, label, placeholder, value, onChange, name, required, type, className, ref, defaultValue, accept}){
+export default function Input({ width, label, placeholder, value, onChange, name, required, type, className, ref, defaultValue, accept, labelColor}){
   return (
     <InputWrapper className={className} width={width}>
-      {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+      {label && <InputLabel htmlFor={name} color={labelColor}>{label}</InputLabel>}
       <StyledInput
         defaultValue={defaultValue}
         ref={ref}

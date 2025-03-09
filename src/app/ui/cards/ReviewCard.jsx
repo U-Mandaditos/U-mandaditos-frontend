@@ -34,7 +34,6 @@ const UserInfo = styled.section`
     flex-direction: column;
     font-size: 1.3rem;
     font-weight: bold;
-    gap: 5px;
 `;
 
 const CommentContainer = styled.p`

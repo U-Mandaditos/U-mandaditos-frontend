@@ -6,11 +6,11 @@
       stars: 4,
     },
     offerInfo: {
-      "priceOffered": "$500",
+      "priceOffered": "L. 500",
       hour: "10:30 AM"
     },
-    priceSuggested: "$600",
-    isSelected: true,
+    priceSuggested: "L. 600",
+    isSelected: false,
   }
 
   export const review= {
