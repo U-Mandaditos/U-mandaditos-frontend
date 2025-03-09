@@ -3,7 +3,7 @@ import styled from "styled-components";
 const LocationSelectContainer = styled.div`
     width: 100%;
     padding: .3rem .7rem;
-    border-radius: 6px;
+    border-radius: 10px;
     background-color: ${(props) => props.theme.colors.primaryLight };
     color: ${(props) => props.theme.colors.secondaryText };
     display: flex;
@@ -24,7 +24,7 @@ const SelectContainer = styled.div`
     width: 35%;
     background-color: ${(props) => props.theme.colors.background };
     display: flex;
-    border-radius: 6px;
+    border-radius: 10px;
     padding: 0 .5rem;
 `;
 
@@ -48,7 +48,7 @@ const Select = styled.select`
 
 `;
 
-export default function LocationSelect({text, optionList}){
+export default function LocationSelect({text, optionList, onChange}){
     return (
         <LocationSelectContainer>
             <LocationInfo>
@@ -57,7 +57,7 @@ export default function LocationSelect({text, optionList}){
             </LocationInfo>
             <SelectContainer>
                 <SelectIcon src="/icons/ubication.svg" alt="ubicacion" />
-                <Select name="" id="">
+                <Select name="" id="" onChange={onChange}>
                     {optionList.map((option) => (
                         <option key={option.key} value={option.name}>{option.name}</option>
                     ))}
