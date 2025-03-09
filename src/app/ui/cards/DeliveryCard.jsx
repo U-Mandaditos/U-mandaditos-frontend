@@ -94,7 +94,7 @@ export default function DeliveryCard ({idDelivery, pickUpLocation, deliveryLocat
                     <TextCard weight="500">Entrega:</TextCard>
                     <TextCard>{runnerName}</TextCard>
                 </FlexContainer>
-                <StatusCard status={status}>{status===1? 'En porgreso': 'En espera'}</StatusCard>
+                <StatusCard status={status}>{status===2? 'En porgreso': 'En espera'}</StatusCard>
 
             </FlexContainer>
             <FlexContainer direction="column" alignitems="flex-end" gap="3px">

@@ -1,79 +1,65 @@
 'use client'
-import { useState } from "react";
-import Input from "./ui/essentials/Input";
 import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
-import Header from "./ui/utilities/Header"; 
-import { useRouter } from "next/navigation"; 
-import IconButton from "./ui/buttons/IconButton";
-import OfferCard from "./ui/cards/OfferCard";
-import ChatMessage from "./ui/utilities/ChatMessage";
 
-
-import ReviewCard from "./ui/cards/ReviewCard";
-import SendInput from "./ui/utilities/SendInput";
-import LocationSelect from "./ui/utilities/LocationSelect";
-import { review, user, location } from "../../data";
-import AccessButton from "./ui/navigation/AccessButton";
 import Button from "./ui/essentials/Button";
-import DeliveryCard from "./ui/cards/DeliveryCard";
-import PostDeliveryCard from "./ui/cards/PostDeliveryCard";
+import styled, { useTheme } from "styled-components";
+import { FlexContainer, FlexItem } from "./ui/essentials/FlexBox";
+
+const PageContainer = styled.div`
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background-color: ${(props) => props.theme.colors.primaryLight};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const PalmThree = styled.img`
+  z-index: 0;
+  position: absolute;
+  top: ${(props) => props.top || ''};
+  bottom: ${(props) => props.bottom || ''};
+  left: ${(props) => props.left || ''};
+  right: ${(props) => props.right || ''};
+  transform: translateX(${(props) => props.rotation || '20deg'});
+  width: ${(props) => props.width || 'auto'};
+`;
+
+const MainImage = styled.img`
+  z-index: 10;
+  width: 110%;
+`;
 
 
 export default function Home() {
-  const router = useRouter();
+  const theme = useTheme();
 
-  const [inputValue, setInputValue] = useState('');
-
-
-  const sendAction = () => {
-    console.log("hola")
+  const handleRegisterClick = () => {
+    router.push("/register")
   }
-  
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
 
 
   return (
-    <>
-      <Header text="U mandaditos" />
+    <PageContainer>
+      <PalmThree src="/img/palm_tree_right.png" alt="palmera" width={"60%"} top={'30%'} right={'0'}/>
+      <PalmThree src="/img/palm_tree_left.png" alt="palmera" width={"40%"} top={'50%'} left={'0'}/>
 
+      <div>
+        <Title text={"Conectamos pasos, simplificamos tu dia"} size={'3.5rem'}/>
 
-      <div className="p-4">
-        <Title text="U mandaitos" />
-
-        <Paragraph children={"Bienvenido a umandaditos"} />
-
-      <Input
-        width="30%"
-        label="Nombre"
-        placeholder="Ingresa tu nombre"
-        value={inputValue}
-        onChange={handleInputChange}
-        name="nombre"
-      />
-
-      <IconButton onClick={() => router.push('/about')}  icon={'arrow_back.svg'} disabled={true} hover={false} />
-      <OfferCard postUser={user.postUser} offerInfo={user.offerInfo} priceSuggested={user.priceSuggested} isSelected={user.isSelected} />
-      <br />
-      <ReviewCard postUser={review.postUser} coment={review.coment} comentDate={review.comentDate} isPosted={review.isPosted} isSelected={review.isSelected}/>
-      <br />
-
-      <SendInput sendAction={sendAction}/>
-
-      <LocationSelect text={location.text} optionList={location.optionList} />
-
-        <button onClick={() => router.push('/about')}>Ir a mandaditos</button> 
-        {/* Este botón es para hacer pruebas de enrutamiento */}
-
-        <Button text={"Continuar"} width={"10%"}/>
-        <DeliveryCard />
-        <ChatMessage text={"Hola, Donde esta ubicado?"} hour={"12:00PM"} isMine={false}/>
-        <ChatMessage text={"Estoy por el polideportivo en el aula 402."} hour={"12:01PM"} isMine={true}/>
-        <ChatMessage text={"Listo."} hour={"12:03PM"} isMine={false}/>
+        <Paragraph text={"Pedidos que caminan contigo, pero sin ti. Pide cosas y alguien mas te las ira a dejar."} color={theme.colors.secondaryText}/>
       </div>
-    </>
+
+      <FlexContainer direction={'column'} alignitems={'center'} gap={'25px'}>
+        <MainImage src="/img/puma_logo.png" alt="Puma Entregando Orden" />
+        <Button text={"Registrarse"} onClick={handleRegisterClick} width={'90%'} borderRadius={'20px'} paddingy={'12px'}/>
+        <FlexContainer gap={'5px'} justifycontent={'center'}>
+            <Paragraph text={"¿Ya tienes una cuenta? puedes"} color={theme.colors.secondaryText} />
+            <a href="/about"><Paragraph text={"Iniciar sesión"} color={theme.colors.primary} /></a> 
+        </FlexContainer>
+      </FlexContainer>
+    </PageContainer>
   );
 }

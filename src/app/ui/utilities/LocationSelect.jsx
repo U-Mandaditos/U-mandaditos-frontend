@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const LocationSelectContainer = styled.div`
     width: 100%;
-    padding: .5rem 1rem;
+    padding: .3rem .7rem;
     border-radius: 6px;
     background-color: ${(props) => props.theme.colors.primaryLight };
     color: ${(props) => props.theme.colors.secondaryText };
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 1.1rem;
+    font-size: 1rem;
 `;
 
 const LocationInfo = styled.div`
@@ -33,7 +33,7 @@ const SelectIcon = styled.img`
 `;
 
 const ContainerIcon = styled.img`
-    width: 1.4rem;
+    width: 1.1rem;
 `;
 
 const Select = styled.select`
