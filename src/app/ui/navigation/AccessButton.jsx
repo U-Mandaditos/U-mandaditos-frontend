@@ -4,7 +4,6 @@ const StyledContainer = styled.div`
         background: ${(props) => props.theme.colors.main || 'white'};
         font-size: 16px;
         weight: 500;
-        padding: 10px 30px;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -33,7 +32,7 @@ export default function AccessButton({ text, Action, icon }) {
         <StyledContainer onClick={Action}>
             <StyledDiv>
                 <IconContainer style={{width: "33px", height: "33px"}} className="mr-3">
-                    <img src={`/img/${icon}.svg`} alt={icon} />
+                    <img src={icon} alt={icon} />
                 </IconContainer>
                 <p>{text}</p>
             </StyledDiv>

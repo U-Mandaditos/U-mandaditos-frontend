@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   font-weight: 500;
   font-family: ${(props) => props.theme.typography.fontFamily};
   border: none;
-  border-radius: ${(props) => props.borderRadius || '6px'};
+  border-radius: ${(props) => props.borderadius || "6px"};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   color: ${(props) => props.textColor || props.theme.colors.main};
   background-color: ${(props) =>
@@ -54,7 +54,7 @@ export default function Button({
       className={className}
       fontSize={fontSize}
       height={height}
-      borderRadius={borderRadius}
+      borderadius={borderRadius}
     >
       {text || value} 
     </StyledButton>
