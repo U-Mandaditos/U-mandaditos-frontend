@@ -47,6 +47,7 @@ const data = {
     ],
     deliverys: [
         {
+            key: 1,
             pickUpLocation: "B2",
             deliveryLocation: "Polideportivo",
             deliveryHour: "3:00 pm",
@@ -56,6 +57,7 @@ const data = {
             price: "L 20.00"
         },
         {
+            key: 2,
             pickUpLocation: "B2",
             deliveryLocation: "Polideportivo",
             deliveryHour: "3:00 pm",
