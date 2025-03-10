@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const OfferCardContainer = styled.div`
     width: 100%;
-    height: 7.5rem;
     padding: 1.3rem 1rem;
     display: flex;
     justify-content: space-between;
@@ -10,7 +9,8 @@ const OfferCardContainer = styled.div`
     font-size: 1rem;
     background-color: ${(props) => (props.isSelected ? '#e4efee' : props.theme.colors.main)};
     border-radius: 15px;
-box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;`;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
+`;
 
 const UserContainer = styled.div`
     display: flex;
@@ -18,8 +18,8 @@ const UserContainer = styled.div`
 `;
 
 const UserImage = styled.img`
-    width: 5rem;
-    height: 5rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 100%;
     object-fit: cover;
 `;
@@ -27,19 +27,20 @@ const UserImage = styled.img`
 const UserInfo = styled.section`
     display: flex;
     flex-direction: column;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
 `;
 
 const UserLocation = styled.p`
     color: ${(props) => props.theme.colors.secondaryText};
-    margin-top: auto;
+    margin-top: 1rem;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: 500;
 `;
 
 const OfferContainer = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
 `;
@@ -64,7 +65,9 @@ const PriceSuggested = styled.p`
 
 const HourContainer = styled.p`
     color: ${(props) => props.theme.colors.secondaryText};
-    margin-top: auto;
+    bottom: 10px;
+    right: 10px;
+    font-size: .9rem;
 `;
 
 const StarsContainer = styled.div`

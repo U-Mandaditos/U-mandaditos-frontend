@@ -5,6 +5,7 @@ const Title_ = styled.h1`
   color: ${(props) => props.color || props.theme.colors.foreground}; 
   font-weight: bold;
   padding: 0;
+  overflow-wrap: break-word;
   font-weight: ${(props) => props.weight || 700};
 `;
 

@@ -22,13 +22,16 @@ const StyledInput = styled.textarea`
   outline: none;
   transition: border 0.3s ease;
   color: ${(props) => props.theme.colors.foreground || '#fff'};
+  height: ${(props) => props.height || 'auto'};
+  font-family: 'Roboto';
+
 
   &:focus {
     border-color: ${(props) => props.theme.colors.primary || '#f8f8f8'};
   }
 `;
 
-export default function Textarea({ width, label, placeholder, value, onChange, name, required, type, className, rows, cols}){
+export default function Textarea({ width, label, placeholder, value, onChange, name, required, type, className, rows, cols, height }){
   return (
     <InputWrapper className={className} width={width}>
       {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
@@ -41,6 +44,7 @@ export default function Textarea({ width, label, placeholder, value, onChange, n
         required={required}
         rows={rows}
         cols={cols}
+        height={height}
       >
       </StyledInput>
     </InputWrapper>
