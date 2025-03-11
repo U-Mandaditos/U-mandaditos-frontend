@@ -1,6 +1,6 @@
 'use client'
 
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import Button from "../ui/essentials/Button"
 import { FlexContainer} from "../ui/essentials/FlexBox"
 import Input from "../ui/essentials/Input"
@@ -13,12 +13,13 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     gap: 2rem;
     padding: 2rem;
 `;
 
 export default function Page() {
+    const theme = useTheme();
     return (
         <>
             <AuthenticationHeader title={"Inicia sesión"} text={"Bienvenido de vuelta a U-Mandaditos"} />
@@ -36,7 +37,7 @@ export default function Page() {
                     <Button borderRadius={"30px"} width={"300px"} text={"Iniciar sesión"} />
                 </FlexContainer>   
                 <FlexContainer direction="row" alignitems={"center"} justifycontent="center" gap="5px">
-                    <Paragraph color={(props) => props.theme.colors.secondaryText} weight={"600"} size={"13px"} text={"¿Todavía no tienes una cuenta?"}/> 
+                    <Paragraph color={theme.colors.secondaryText} weight={"600"} size={"13px"} text={"¿Todavía no tienes una cuenta?"}/> 
                     <Link href="/register" text={"Regístrate"} color={(props) => props.theme.colors.primary} size={"13px"} weight={"600"} float={"none"} />
                 </FlexContainer>      
             </StyledForm>

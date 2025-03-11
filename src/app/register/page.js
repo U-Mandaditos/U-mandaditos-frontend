@@ -32,7 +32,7 @@ export default function Page() {
             <StyledForm className="p-5">
                 <div> 
                     <Title className={"mb-2"} weight={"strong"} size={"medium"} text="Nombre Completo" />
-                    <Input name={"name"} required={false} type={"text"} width={"324px"} placeholder="e.g Daniel Alexander Ochoa" />
+                    <Input name={"name"} required={false} type={"text"} width={"324px"} placeholder="e.g Daniel Alexander Ochoa"/>
                 </div>
                 <div> 
                     <Title className={"mb-2"} weight={"strong"} size={"medium"} text="Correo" />

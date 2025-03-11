@@ -100,6 +100,7 @@ export default function Home() {
             <Title text={"Tus mandaditos posteados"} weight={"450"} size={"20px"} className={"mb-2"}/>
             {data.deliverys.map((delivery) =>
                 <DeliveryCard 
+                    key={delivery.key}
                     pickUpLocation={delivery.pickUpLocation} 
                     deliveryLocation ={delivery.deliveryLocation}
                     deliveryHour={delivery.deliveryHour} 
