@@ -1,9 +1,10 @@
+'use client'
 import styled from "styled-components";
+import Paragraph from "../essentials/Paragraph";
 
 const StyledContainer = styled.div`   
         background: ${(props) => props.theme.colors.main || 'white'};
         font-size: 16px;
-        weight: 500;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -20,7 +21,7 @@ const StyledDiv = styled.div`
 
 const IconContainer = styled.div`
     background: ${(props) => props.theme.colors.lineColor || '#ECECEC'};
-    border-radius: 30%;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,7 +35,7 @@ export default function AccessButton({ text, Action, icon }) {
                 <IconContainer style={{width: "33px", height: "33px"}} className="mr-3">
                     <img src={icon} alt={icon} />
                 </IconContainer>
-                <p>{text}</p>
+                <Paragraph text={text} weight={500}></Paragraph>
             </StyledDiv>
             <IconContainer style={{width: "18px", height: "18px"}}>
                 <img src="/img/rightArrow.svg" alt="rightArrow" />
