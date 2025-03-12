@@ -69,7 +69,7 @@ export default function ({children, title}){
   
     if (translateY < quarter) {
       newPosition = MinLimit; // Se abre completamente
-    } else if (translateY < half) {
+    } else if (translateY < half || (translateY > half && translateY < half+quarter)) {
       newPosition = half; // Se queda en la mitad
     }
   
