@@ -10,10 +10,11 @@ const ContainerGeneral = styled.div`
     height: min-content;
     border-radius: 10px;
     border: 1px solid ${(props) => props.theme.colors.lineColor};
-    background-color: ${(props) => props.isSelected?  props.theme.colors.secondaryLight: props.theme.colors.main};
+    background-color: ${(props) => props.isselected?  props.theme.colors.secondaryLight: props.theme.colors.main};
     display: flex;
     flex-direction: row;
     padding: 10px;
+    justify-content: space-between;
 `;
 
 const OutContainer = styled.div`
@@ -64,12 +65,12 @@ const SecondContainer = styled.div`
     border-radius: 10px;
 `;
 
-export default function ActionDeliveryCard ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, isSelected, onClick }) {
+export default function ActionDeliveryCard ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, isselected, onClick, action }) {
     const theme = useTheme();
     return (
         <>
             <OutContainer onClick={onClick}>
-                <ContainerGeneral isSelected={isSelected}>
+                <ContainerGeneral isselected={isselected}>
                     <FlexContainer width={"75%"} height="100%" direction="column" gap="2px">
                         <FlexContainer height="auto" direction="row" alignitems="center" gap="5px" className='mb-2'>
                             <Icon as={RunnerIcon}></Icon>
@@ -93,14 +94,14 @@ export default function ActionDeliveryCard ({idDelivery, pickUpLocation, deliver
                         </FlexContainer>
 
                     </FlexContainer>
-                    <FlexContainer direction="column" alignitems="flex-end" gap="3px" width="auto">
-                        <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour }</TextCard>
-                        <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{price}</TextCard>
+                    <FlexContainer direction="column" alignitems="flex-start" gap="3px" width="auto">
+                        <TextCard color={theme.colors.foreground} weight="500" size="16px">{`L ${price} `}</TextCard>
+                        <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{deliveryHour}</TextCard>
                     </FlexContainer>
 
                 </ContainerGeneral>
-                {isSelected && (
-                    <SecondContainer className='p-2'>
+                {isselected && (
+                    <SecondContainer className='p-2' onClick={action}>
                         <TextCard weight="500" inline="yes" color={theme.colors.main} size="14px">¿Quiere hacer una contraoferta?</TextCard>
                         <Icon color={theme.colors.main} as={Acces} width="9px"/>
                     </SecondContainer>
