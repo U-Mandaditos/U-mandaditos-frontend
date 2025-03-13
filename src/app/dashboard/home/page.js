@@ -47,6 +47,7 @@ const data = {
     ],
     deliverys: [
         {
+            key: 1,
             pickUpLocation: "B2",
             deliveryLocation: "Polideportivo",
             deliveryHour: "3:00 pm",
@@ -56,6 +57,7 @@ const data = {
             price: "L 20.00"
         },
         {
+            key: 2,
             pickUpLocation: "B2",
             deliveryLocation: "Polideportivo",
             deliveryHour: "3:00 pm",
@@ -98,6 +100,7 @@ export default function Home() {
             <Title text={"Tus mandaditos posteados"} weight={"450"} size={"20px"} className={"mb-2"}/>
             {data.deliverys.map((delivery) =>
                 <DeliveryCard 
+                    key={delivery.key}
                     pickUpLocation={delivery.pickUpLocation} 
                     deliveryLocation ={delivery.deliveryLocation}
                     deliveryHour={delivery.deliveryHour} 

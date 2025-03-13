@@ -40,21 +40,29 @@ export default function Page(){
 
     return (<>
         <Header text={"Tu perfil"} router={router}></Header>
-        <div className="px-5">
+
+        <div className="px-5 mb-5">
+            {/**Nombre, estrellas e informacion del usuario */}
             <UserCard user={data.user}></UserCard>
             <Paragraph text={"Ingeniería en Sistemas"} weight={600} className={"mt-3"} color={theme.colors.secondaryText}></Paragraph>
             <Paragraph text={`${data.user.age} Años`} weight={600} className={"mt-1"} color={theme.colors.secondaryText}></Paragraph>
-            <FlexContainer className="mt-4">
+            
+            {/**Estadisticas de cantidad de entregas y pedidos hechos por el usuario */}
+            <FlexContainer className="mt-4" justifycontent="center">
                 <IconTextCard icon={DeliveryIcon} text={`${data.stats.deliveries} Entregas`} className={"mr-5"}></IconTextCard>
                 <IconTextCard icon={PostIcon} text={`${data.stats.post} Pedidos`} color={theme.colors.primaryLight}></IconTextCard>
             </FlexContainer>
-            <FlexContainer className="mt-4 px-4" justifycontent="center">
-                <Button text={"Editar Perfil"} borderRadius={"30px"} paddingx={"60px"} paddingy={"8px"} className={"mr-6"}></Button>
+
+            {/**Estadisticas botón de editar perfil */}
+            <FlexContainer className="mt-4" justifycontent="center">
+                <Button text={"Editar Perfil"} borderRadius={"30px"} paddingx={"60px"} paddingy={"8px"} onClick={()=>{router.push('/dashboard/profile/edit')}}></Button>
             </FlexContainer>
         </div>
+
         <Divider/>
+
         <FlexContainer direction="column" className="px-4">
-            {buttonLinks.map(button=><AccessButton text={button.text} icon={button.icon} Action={()=>{router.push(button.href)}}></AccessButton>)}
+            {buttonLinks.map((button,index)=><AccessButton key={index} text={button.text} icon={button.icon} Action={()=>{router.push(button.href)}}></AccessButton>)}
         </FlexContainer>
     </>)
 }

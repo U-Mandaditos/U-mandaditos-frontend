@@ -21,6 +21,7 @@ const UserImage = styled.img`
     width: 4rem;
     height: 4rem;
     border-radius: 100%;
+    object-fit: cover;
 `;
 
 const UserInfo = styled.section`
@@ -79,12 +80,12 @@ const Star = styled.img`
     height: 20px;
 `;
 
-export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelected = false }) {
+export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelected = false, onClick }) {
     const starsFilled = postUser.stars; // Número de estrellas llenas
     const starsEmpty = 5 - starsFilled; // Número de estrellas vacías
 
     return (
-        <OfferCardContainer isSelected={isSelected}>
+        <OfferCardContainer isSelected={isSelected} onClick={onClick}>
             <UserContainer>
                 <UserImage src={postUser.image} alt="User" />
                 <UserInfo>
@@ -99,7 +100,7 @@ export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelec
                                 <Star key={`empty-${index}`} src='/icons/star_empty.svg' alt="empty star" />
                             ))}
                         </StarsContainer>
-                    <UserLocation>{postUser.location}</UserLocation>
+                    <UserLocation>{`Esta en ${postUser.location}`}</UserLocation>
                 </UserInfo>
             </UserContainer>
             <OfferContainer>

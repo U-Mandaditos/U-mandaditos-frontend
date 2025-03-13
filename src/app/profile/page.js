@@ -56,18 +56,24 @@ export default function Page() {
     return (
         <>
             <Header text={"Tu perfil"} router={router}></Header>
-            <div className="px-5">
+
+            <div className="px-4">
                 <UserCard user={data.user}></UserCard>
+
                 <Paragraph text={"Ingeniería en Sistemas"} weight={600} className={"mt-3"} color={theme.colors.secondaryText}></Paragraph>
                 <Paragraph text={`${data.user.age} Años`} weight={600} className={"mt-1"} color={theme.colors.secondaryText}></Paragraph>
-                <FlexContainer className="mt-4">
+                
+                <FlexContainer className="mt-4" justifycontent="center">
                     <IconTextCard icon={DeliveryIcon} text={`${data.stats.deliveries} Entregas`} className={"mr-5"}></IconTextCard>
                     <IconTextCard icon={PostIcon} text={`${data.stats.post} Pedidos`} color={theme.colors.primaryLight}></IconTextCard>
                 </FlexContainer>
-                <Title text={"Reseñas"} className={"mb-4 mt-4"}></Title>
-                <FlexContainer direction="column" gap="10px">
+                
+                <Title text={"Reseñas"} className={"mb-3 mt-5"}></Title>
+                
+                <FlexContainer direction="column" gap="20px">
                     {data.reviews.map(review => <ReviewCard postUser={review.user} isPosted={review.isPosted} coment={review.coment} comentDate={review.comentDate}></ReviewCard>)}
                 </FlexContainer>
+
             </div>
         </>
     )

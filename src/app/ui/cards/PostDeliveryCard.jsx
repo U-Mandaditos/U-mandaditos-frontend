@@ -91,14 +91,14 @@ export default function PostDeliveryCard ({idDelivery, pickUpLocation, deliveryL
                     </FlexContainer>
                     <FlexContainer direction="column" alignitems="flex-end" gap="3px" width="auto">
                         <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour }</TextCard>
-                        <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{price}</TextCard>
+                        <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{`L. ${price}`}</TextCard>
                         
                     </FlexContainer>
 
                 </ContainerGeneral>
             <FlexContainer direction="row" gap="6px" height="50%" className='p-2'>
                 <TextCard weight="500" inline="yes" color={theme.colors.primary} size="14px">Contraoferta:</TextCard>
-                <TextCard weight="500" color={theme.colors.foreground} size="14px">{price}</TextCard>
+                <TextCard weight="500" color={theme.colors.foreground} size="14px">{`L. ${bottomText}`}</TextCard>
             </FlexContainer>
         </OutContainer>): (
             <ContainerGeneral color={isSelected? theme.colors.secondaryLight: 'transparent'} onClick={onClick}>
@@ -126,8 +126,8 @@ export default function PostDeliveryCard ({idDelivery, pickUpLocation, deliveryL
 
             </FlexContainer>
             <FlexContainer direction="column" alignitems="flex-end" gap="3px" width="auto">
-                <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour }</TextCard>
-                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{price}</TextCard>
+                <TextCard color={theme.colors.foreground} weight="500" size="16px">{`L. ${price}`}</TextCard>
+                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{deliveryHour }</TextCard>
                 
             </FlexContainer>
 

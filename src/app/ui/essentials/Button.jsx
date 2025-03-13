@@ -10,10 +10,10 @@ const StyledButton = styled.button`
   border: none;
   border-radius: ${(props) => props.borderadius || "6px"};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  color: ${(props) => props.textColor || props.theme.colors.main};
+  color: ${(props) => props.textcolor || props.theme.colors.main};
   background-color: ${(props) =>
     props.disabled
-      ? props.theme.colors.tertiary
+      ? props.theme.colors.secondaryText
       : props.color || props.theme.colors.primary}; 
   transition: background-color 0.3s ease;
 
@@ -47,7 +47,7 @@ export default function Button({
       paddingx={paddingx}
       paddingy={paddingy}
       color={color}
-      textColor={textColor}
+      textcolor={textColor}
       type={type}
       disabled={disabled}
       onClick={onClick}
