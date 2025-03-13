@@ -35,7 +35,6 @@ export default function Page(){
         }
     }
 
-
     const router = useRouter();
     const theme = useTheme();
 
