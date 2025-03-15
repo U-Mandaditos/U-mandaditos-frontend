@@ -48,7 +48,7 @@ const Select = styled.select`
 
 `;
 
-export default function LocationSelect({text, optionList, onChange}){
+export default function LocationSelect({text, optionList, onChange, name}){
     return (
         <LocationSelectContainer>
             <LocationInfo>
@@ -57,7 +57,7 @@ export default function LocationSelect({text, optionList, onChange}){
             </LocationInfo>
             <SelectContainer>
                 <SelectIcon src="/icons/ubication.svg" alt="ubicacion" />
-                <Select name="" id="" onChange={onChange}>
+                <Select name={name} onChange={onChange}>
                     {optionList.map((option) => (
                         <option key={option.key} value={option.name}>{option.name}</option>
                     ))}

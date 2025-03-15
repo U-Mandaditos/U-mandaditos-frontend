@@ -7,7 +7,6 @@ import LocationSelect from "@/app/ui/utilities/LocationSelect";
 import styled, { useTheme } from "styled-components";
 import Button from "@/app/ui/essentials/Button";
 import Textarea from "@/app/ui/utilities/Textarea";
-import { Fleur_De_Leah } from "next/font/google";
 import { FlexContainer } from "@/app/ui/essentials/FlexBox";
 import { useState } from "react";
 
@@ -16,39 +15,40 @@ const PageContainer = styled.div`
     padding: 2.5rem 1.5rem;
 `;
 
-export default function MandaditoNuevo(){
+export default function MandaditoNuevo() {
     const theme = useTheme();
 
-    const [titulo, setTitulo] = useState();
-    const [descripcion, setDescripcion] = useState();
-    const [comision, setComision] = useState();
-    const [miUbicacion, setMiUbicacion] = useState();
-    const [dondeUbicacion, setDondeUbicacion] = useState();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [formData, setFormData] = useState({
+        title: '',
+        description: '',
+        commission: '',
+        fromLocation: '',
+        toLocation: ''
+    });
 
-    const handleChangeTitulo = (e) => {
-        setTitulo(e.target.value);
-    }
+    const handleChange = (e) => {
+        console.log(e);
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
 
-    const handleChangeDescripcion = (e) => {
-        setDescripcion(e.target.value);
-    }
 
-    const handleChangeComision = (e) => {
-        setComision(e.target.value);
-    }
+    const handlePostClick = () => {
+        const isEmpty = Object.values(formData).some(value => value.trim() === '');
 
-    const handleChangeMiUbicacion = (e) => {
-        setMiUbicacion(e.target.value);
-        console.log('ejecutando')
-    }
+        if (isEmpty) {
+            setErrorMessage("Favor llena todos los campos.");
+            return;
+        }
 
-    const handleChangeDondeUbicacion = (e) => {
-        setDondeUbicacion(e.target.value);
-    }
+        setErrorMessage("");
+        console.log("Posting:", formData);
+    };
 
-    const handlePostearClick = () => {
-        console.log("posteando");
-    }
 
     const locations = [
         {
@@ -68,24 +68,25 @@ export default function MandaditoNuevo(){
     return (
         <PageContainer>
 
-            <Title text={"Postea un mandadito"} size={'2rem'} wwigt={'500'}/>
+            <Title text={"Postea un mandadito"} size={'2rem'} weight={'500'} />
 
-            <Paragraph text={"Completa los datos de tu mandadito"} color={theme.colors.secondaryText} className={'mb-5'}/>
+            <Paragraph text={"Completa los datos de tu mandadito"} color={theme.colors.secondaryText} className={'mb-5'} />
 
-            <FlexContainer direction={'column'} gap={'22px'} alignitems={'center'}>
-                <LocationSelect text={"¿Donde estas?"} optionList={locations} onChange={handleChangeMiUbicacion} />
-                <LocationSelect text={"¿Donde es tu mandadito?"} optionList={locations} onChange={handleChangeDondeUbicacion}/>
+            <FlexContainer direction={'column'} gap={'22px'} alignitems={'center'} className="mt-5">
+                <LocationSelect text={"¿Donde estas?"} optionList={locations} onChange={handleChange} name={'fromLocation'} />
+                <LocationSelect text={"¿Donde es tu mandadito?"} optionList={locations} onChange={handleChange} name={'toLocation'} />
 
-                <Input label={"Título"} placeholder={"e.g. papas fritas del CC"} value={titulo} onChange={handleChangeTitulo}/>
+                <Input label={"Título"} placeholder={"e.g. papas fritas del CC"} value={formData.title} onChange={handleChange} name={'title'} />
 
 
-                <Textarea label={"Descripción"} placeholder={"e.g. Necesito que alguien me compre unas papas frita del CC y me las traiga lo antes posible"} value={descripcion} onChange={handleChangeDescripcion} height={'90px'}/>
+                <Textarea label={"Descripción"} placeholder={"e.g. Necesito que alguien me compre unas papas frita del CC y me las traiga lo antes posible"} value={formData.description} onChange={handleChange} height={'90px'} name={'description'} />
 
-                <Input label={"Comisión ofrecida"} placeholder={"e.g. 30"} value={comision} onChange={handleChangeComision} type={'number'}/>
+                <Input label={"Comisión ofrecida"} placeholder={"e.g. 30"} value={formData.commission} onChange={handleChange} type={'number'} name={'commission'} />
 
-                <Button text={"Postear"} onClick={handlePostearClick} width={'90%'} paddingy={'15px'} className={'mt-5'}/>
+                {errorMessage && <Paragraph text={errorMessage} color={'red'} />}
+                <Button text={"Postear"} onClick={handlePostClick} width={'90%'} paddingy={'15px'} className={'mt-5'} />
 
             </FlexContainer>
-        </PageContainer>      
+        </PageContainer>
     )
 }

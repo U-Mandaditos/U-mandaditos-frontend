@@ -35,7 +35,7 @@ const UserLocation = styled.p`
     color: ${(props) => props.theme.colors.secondaryText};
     margin-top: 1rem;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 100;
 `;
 
 const OfferContainer = styled.div`
@@ -43,6 +43,7 @@ const OfferContainer = styled.div`
     position: relative;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-end;
 `;
 
 const PriceContainer = styled.div`
@@ -81,8 +82,8 @@ const Star = styled.img`
 `;
 
 export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelected = false, onClick }) {
-    const starsFilled = postUser.stars; // Número de estrellas llenas
-    const starsEmpty = 5 - starsFilled; // Número de estrellas vacías
+    const starsFilled = postUser.stars; 
+    const starsEmpty = 5 - starsFilled; 
 
     return (
         <OfferCardContainer isSelected={isSelected} onClick={onClick}>
@@ -105,8 +106,8 @@ export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelec
             </UserContainer>
             <OfferContainer>
                 <PriceContainer>
-                    <PriceOffered>{offerInfo.priceOffered}</PriceOffered>
-                    <PriceSuggested>{priceSuggested}</PriceSuggested>
+                    <PriceOffered>L. {offerInfo.priceOffered}</PriceOffered>
+                    <PriceSuggested>L. {priceSuggested}</PriceSuggested>
                 </PriceContainer>
                 <HourContainer>{offerInfo.hour}</HourContainer>
             </OfferContainer>

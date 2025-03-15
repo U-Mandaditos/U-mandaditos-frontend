@@ -39,8 +39,6 @@ export default function Home() {
     router.push("/register")
   }
 
-
-
   return (
     <PageContainer>
       <PalmThree src="/img/palm_tree_right.png" alt="palmera" width={"60%"} top={'30%'} right={'0'}/>

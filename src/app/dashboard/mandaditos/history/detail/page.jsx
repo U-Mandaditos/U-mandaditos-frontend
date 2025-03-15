@@ -40,10 +40,9 @@ export default function Mandadito() {
         },
         details: {
             description: "Necesito que alguien me compre unas papas fritas del CC y me las traiga lo antes posible.",
-            price: "20",
             suggestedPrice: "50",
         },
-        postUser: {
+        runnerUser: {
             name: "Daniel Ochoa",
             image: "/img/pruebas/odin.svg",
             stars: 4,
@@ -56,11 +55,11 @@ export default function Mandadito() {
         date: "08-03-2025",
     };
 
-    const { locations, details, postUser, comment, date } = order;
+    const { locations, details, runnerUser, comment, date } = order;
 
     return (
         <>
-            <Header text="Tu entrega" router={router} />
+            <Header text="Tu mandadito" router={router} />
             <PageContainer>
                 <FlexContainer direction="column" gap="2rem">
                     
@@ -79,18 +78,17 @@ export default function Mandadito() {
 
                     {/* Tarifas */}
                     <Section title="Tarifa indicada">
-                        <Paragraph text={'L. ' + details.price} size="20px" weight={400} color={theme.colors.primary} className="ml-3" />
-                        <Paragraph text={'L. ' +  details.suggestedPrice} weight={400} color={theme.colors.secondaryText} className="ml-3" />
+                        <Paragraph text={'L. ' +  details.suggestedPrice} weight={400} color={theme.colors.secondaryText} className="ml-3" />                    
                     </Section>
 
-                    {/* Información del usuario que publicó */}
-                    <Section title="Publicado por">
-                        <ReviewCard postUser={postUser} comentDate={date} />
+                    {/* Información del usuario que acepto */}
+                    <Section title="Oferta aceptada">
+                        <ReviewCard postUser={runnerUser} comentDate={date} />
                     </Section>
 
                     {/* Comentario sobre la calificación */}
                     <Section title="Calificación">
-                        <ReviewCard postUser={postUser} coment={comment.description} comentDate={comment.date} />
+                        <ReviewCard postUser={runnerUser} coment={comment.description} comentDate={comment.date} />
                     </Section>
 
                     {/* Botón de acción */}

@@ -29,8 +29,8 @@ const Star = styled.img`
 `;
 
 export default function UserCard({user}){
-    const starsFilled = user.stars; // Número de estrellas llenas
-    const starsEmpty = 5 - starsFilled; // Número de estrellas vacías
+    const starsFilled = user.stars; 
+    const starsEmpty = 5 - starsFilled; 
     
     return (<UserContainer>
         <UserImage src={user.image} alt="User" />

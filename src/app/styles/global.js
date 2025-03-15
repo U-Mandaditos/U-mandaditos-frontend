@@ -22,6 +22,11 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
   ${({ theme }) => Object.entries(theme.spacing).map(
     ([key, value]) => `

@@ -32,7 +32,7 @@ const UserImage = styled.img`
 const UserInfo = styled.section`
     display: flex;
     flex-direction: column;
-    font-size: 1.3rem;
+    font-size: 17px;
     font-weight: bold;
 `;
 
@@ -71,8 +71,8 @@ const StarsContainer = styled.div`
 `;
 
 const Star = styled.img`
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 `;
 
 const Icon = styled.img`
@@ -82,8 +82,9 @@ const Icon = styled.img`
 `;
 
 export default function ReviewCard({ postUser, coment, comentDate, isPosted, isSelected }) {
-    const starsFilled = postUser.stars; // Número de estrellas llenas
-    const starsEmpty = 5 - starsFilled; // Número de estrellas vacías
+    console.log(isPosted)
+    const starsFilled = postUser.stars; 
+    const starsEmpty = 5 - starsFilled;
 
     return (
         <ReviewCardContainer isSelected={isSelected}>
@@ -104,16 +105,15 @@ export default function ReviewCard({ postUser, coment, comentDate, isPosted, isS
                         </StarsContainer>
                     </UserInfo>
                 </UserContainer>
-                <CommentContainer>{coment}</CommentContainer>
-            </Review>
+                
+                {coment && <CommentContainer>{coment}</CommentContainer>}
+
+           </Review>
             <DateParagraph>{comentDate}</DateParagraph>
-            {isPosted ? (
+            {isPosted !== undefined && (
                 <PostParagraph isPosted={isPosted}>
-                    {postUser.name} posteó un mandadito. <Icon src="/icons/post.svg" />
-                </PostParagraph>
-            ) : (
-                <PostParagraph isPosted={isPosted}>
-                    {postUser.name} hizo un mandadito <Icon src="/icons/man_walking.svg" />
+                    {postUser.name} {isPosted ? "posteó un mandadito." : "hizo un mandadito."} 
+                    <Icon src={isPosted ? "/icons/post.svg" : "/icons/man_walking.svg"} />
                 </PostParagraph>
             )}
         </ReviewCardContainer>
