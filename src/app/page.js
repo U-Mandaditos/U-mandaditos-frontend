@@ -1,6 +1,7 @@
 'use client'
 import Title from "./ui/essentials/Title";
 import Paragraph from "./ui/essentials/Paragraph";
+import { useRouter } from "next/navigation";
 
 import Button from "./ui/essentials/Button";
 import styled, { useTheme } from "styled-components";
@@ -34,6 +35,7 @@ const MainImage = styled.img`
 
 export default function Home() {
   const theme = useTheme();
+  const router = useRouter();
 
   const handleRegisterClick = () => {
     router.push("/register")
