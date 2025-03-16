@@ -18,6 +18,14 @@ export const validatePassword = (password) => {
     return '';
   };
 
+export const validateConfirmPassword = (password, confirmPassword) => {
+  if (password !== confirmPassword) {
+    return 'Las contraseñas no coinciden';
+  }
+
+  return '';
+}
+
 export const validateName = (name) => {
     if (validateSqlInjection(name)) {
       return 'Nombre inválido';

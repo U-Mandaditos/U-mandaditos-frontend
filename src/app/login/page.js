@@ -9,7 +9,7 @@ import Link from "../ui/essentials/Link"
 import TitleHeader from "../ui/utilities/TitleHeader"
 import { useState } from 'react';
 
-import { validateEmail, validatePassword } from '../utils/validators';
+import { validateEmail } from '../utils/validators';
 
 const StyledForm = styled.form`
     display: flex;
@@ -38,7 +38,6 @@ export default function Page() {
         if(emError){
             setEmailError(emError)   
             setIsLogin(false)
-            console.log('email error')
             return
         }
 
