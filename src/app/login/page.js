@@ -5,9 +5,11 @@ import Button from "../ui/essentials/Button"
 import { FlexContainer} from "../ui/essentials/FlexBox"
 import Input from "../ui/essentials/Input"
 import Paragraph from "../ui/essentials/Paragraph"
-import Title from "../ui/essentials/Title"
 import Link from "../ui/essentials/Link"
 import TitleHeader from "../ui/utilities/TitleHeader"
+import { useState } from 'react';
+
+import { validateEmail, validatePassword } from '../utils/validators';
 
 const StyledForm = styled.form`
     display: flex;
@@ -20,22 +22,58 @@ const StyledForm = styled.form`
 
 export default function Page() {
     const theme = useTheme();
+    const [isLogin, setIsLogin] = useState(false);
+    const [emailError, setEmailError] = useState('');
+    const [logginError, setLogginError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLogin(true);
+        setEmailError('');
+
+        let emError = validateEmail(email)
+
+        if(emError){
+            setEmailError(emError)   
+            setIsLogin(false)
+            console.log('email error')
+            return
+        }
+
+        try {
+            // Aquí se procesa el inicio de sesión, esto solo es código de prueba
+            setTimeout(() => {
+                console.log('Logged in');
+                setIsLogin(false)   
+            }
+            , 2000);
+
+        } catch (err) {
+            setIsLogin(false)
+            setLogginError(err.message || 'Error en el inicio de sesión')
+        }
+    }
+
     return (
         <>
             <TitleHeader title={"Inicia sesión"} text={"Bienvenido de vuelta a U-Mandaditos"} />
-            <StyledForm>
-                <Input label={"Correo"} name={"email"} required={false} type={"email"} width={"314px"} placeholder="e.g afcastillof@unah.hn" />
+            <StyledForm onSubmit={handleSubmit}> 
+                <Input onChange={e => setEmail(e.target.value)} label={"Correo"} value={email} name={"email"} required={true} type={"email"} width={"314px"} placeholder="e.g afcastillof@unah.hn" />
+                {emailError && <Paragraph color="red" size="14px" text={emailError}/>}
                 <div>
-                    <Input label={"Contraseña"} name={"password"} type={"password"} required={false} width={"314px"} placeholder="Ingresa tu contraseña" />
+                    <Input onChange={e => setPassword(e.target.value)} label={"Contraseña"} value={password} name={"password"} type={"password"} required={true} width={"314px"} placeholder="Ingresa tu contraseña" />
                     <Link text={"¿Olvidaste tu contraseña?"} color={theme.colors.secondaryText} size={"13px"} weight={"400"} float={"right"} href={"#"} />
                 </div>   
                 <FlexContainer direction="column" alignitems="center">
-                    <Button borderRadius={"30px"} width={"300px"} text={"Iniciar sesión"} />
+                    <Button disabled={isLogin} type='submit' borderRadius={"30px"} width={"300px"} text={isLogin ? 'Iniciando Sesión...' : 'Iniciar Sesión'}/>
                 </FlexContainer>   
                 <FlexContainer direction="row" alignitems={"center"} justifycontent="center" gap="5px">
                     <Paragraph color={theme.colors.secondaryText} weight={"600"} size={"13px"} text={"¿Todavía no tienes una cuenta?"}/> 
                     <Link href="/register" text={"Regístrate"} color={theme.colors.primary} size={"13px"} weight={"600"} float={"none"} />
                 </FlexContainer>      
+                {logginError && <Paragraph color="red" size="14px" text={logginError}/>}
             </StyledForm>
         </>
     );
