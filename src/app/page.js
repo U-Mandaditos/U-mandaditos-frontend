@@ -57,7 +57,7 @@ export default function Home() {
         <Button text={"Registrarse"} onClick={handleRegisterClick} width={'90%'} borderRadius={'20px'} paddingy={'12px'}/>
         <FlexContainer gap={'5px'} justifycontent={'center'}>
             <Paragraph text={"¿Ya tienes una cuenta? puedes"} color={theme.colors.secondaryText} />
-            <a href="/about"><Paragraph text={"Iniciar sesión"} color={theme.colors.primary} /></a> 
+            <a href="/login"><Paragraph text={"Iniciar sesión"} color={theme.colors.primary} /></a> 
         </FlexContainer>
       </FlexContainer>
     </PageContainer>

@@ -3,6 +3,7 @@ import Paragraph from "../essentials/Paragraph";
 import styled from "styled-components";
 import { FlexContainer } from "../essentials/FlexBox";
 import { useTheme } from "styled-components";
+import { useRouter } from "next/navigation";
 
 const StyledHeader = styled.header`
     margin-top: 32px;
@@ -15,6 +16,7 @@ const StyledHeader = styled.header`
 
 export default function TitleHeader({ title, text }) {
     const theme = useTheme();
+    const router = useRouter();
     return (
         <StyledHeader>
             <FlexContainer direction={"column"} alingnitems={"start"} justifycontent={"center"}>

@@ -68,11 +68,15 @@ export default function Page() {
                 <FlexContainer direction="column" alignitems="center">
                     <Button disabled={isLogin} type='submit' borderRadius={"30px"} width={"300px"} text={isLogin ? 'Iniciando Sesión...' : 'Iniciar Sesión'}/>
                 </FlexContainer>   
+                {logginError && <Paragraph color="red" size="14px" text={logginError}/>}
                 <FlexContainer direction="row" alignitems={"center"} justifycontent="center" gap="5px">
                     <Paragraph color={theme.colors.secondaryText} weight={"600"} size={"13px"} text={"¿Todavía no tienes una cuenta?"}/> 
                     <Link href="/register" text={"Regístrate"} color={theme.colors.primary} size={"13px"} weight={"600"} float={"none"} />
+                </FlexContainer>  
+                <FlexContainer direction="row" alignitems={"center"} justifycontent="center" gap="5px">
+                    <Paragraph color={theme.colors.secondaryText} weight={"600"} size={"13px"} text={"Regresar a "}/> 
+                    <Link href="/" text={"la página principal"} color={theme.colors.primary} size={"13px"} weight={"600"} float={"none"} />
                 </FlexContainer>      
-                {logginError && <Paragraph color="red" size="14px" text={logginError}/>}
             </StyledForm>
         </>
     );

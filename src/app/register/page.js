@@ -98,11 +98,15 @@ export default function Page() {
                 <FlexContainer width="100%" justifycontent={"center"} alignitems={"center"}>
                     <Button disabled={isRegistring} type='submit' borderRadius={"30px"} width={"300px"} text={isRegistring ? 'Registrando...' : 'Registrar'} />
                 </FlexContainer> 
+                { errors.registerError && <p style={ { color:"red", size:"14px", float:"left"} }> { errors.registerError} </p> }
                 <FlexContainer width="100%" justifycontent={"center"} alignitems={"center"} gap="5px" >
                     <Paragraph color={theme.colors.secondaryText} weight={"600"} size={"13px"} text={"¿Ya tienes una cuenta?"} />
                     <Link href="/login" text={"Inicia Sesión"} color={theme.colors.primary} size={"13px"} weight={"600"} float={"none"} />
                 </FlexContainer>
-                { errors.registerError && <p style={ { color:"red", size:"14px", float:"left"} }> { errors.registerError} </p> }
+                <FlexContainer direction="row" alignitems={"center"} justifycontent="center" gap="5px">
+                    <Paragraph color={theme.colors.secondaryText} weight={"600"} size={"13px"} text={"Regresar a "}/> 
+                    <Link href="/" text={"la página principal"} color={theme.colors.primary} size={"13px"} weight={"600"} float={"none"} />
+                </FlexContainer>  
             </StyledForm>
         </>
         
