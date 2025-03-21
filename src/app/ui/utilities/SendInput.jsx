@@ -50,17 +50,12 @@ export { InputWrapper, Input, Button, Icon };
 
 
 
-export default function SendInput({sendAction }){
-    const [value, setValue] = useState('');
-
-    const handleInputChange = (e) => {
-        setValue(e.target.value);
-    }
+export default function SendInput({sendAction, value, handleChange}){
 
     return (
         <InputWrapper>
-            <Input type="text" placeholder="Escribe algo..." onChange={handleInputChange} value={value}/>
-            <Button type="button"> <Icon src="/icons/send.svg" /></Button>
+            <Input type="text" placeholder="Escribe algo..." onChange={handleChange} value={value}/>
+            <Button type="button" onClick={sendAction}> <Icon src="/icons/send.svg" /></Button>
         </InputWrapper>
     )
 
