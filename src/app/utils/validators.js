@@ -42,7 +42,7 @@ export const validateEmail = (email) => {
     return '';
 };
 
-const validateSqlInjection = (input) => {
+export const validateSqlInjection = (input) => {
     // Verifica caracteres especiales y palabras reservadas de SQL
     const sqlInjectionPattern = /['"%;()*<>]/;
     const sqlKeywordsPattern = /\b(SELECT|INSERT|DELETE|UPDATE|JOIN|MERGE|EXEC|CALL|DROP|UNION|CREATE|ALTER|TRUNCATE|REPLACE)\b/i;

@@ -19,7 +19,7 @@ export default function StatusPopUp({response, isOpen, onClose}){
                 : "/img/error-image.png"
             }
           />
-          <Paragraph size="18px">{response?.message}</Paragraph>
+          <Paragraph size="18px" text={response?.message}></Paragraph>
         </FlexContainer>
       </Modal>
     );

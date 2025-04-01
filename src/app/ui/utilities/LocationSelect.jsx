@@ -21,7 +21,7 @@ const LocationInfo = styled.div`
 
 
 const SelectContainer = styled.div`
-    width: 35%;
+    width: 50%;
     background-color: ${(props) => props.theme.colors.background };
     display: flex;
     border-radius: 10px;
@@ -59,7 +59,7 @@ export default function LocationSelect({text, optionList, onChange, name}){
                 <SelectIcon src="/icons/ubication.svg" alt="ubicacion" />
                 <Select name={name} onChange={onChange}>
                     {optionList.map((option) => (
-                        <option key={option.key} value={option.name}>{option.name}</option>
+                        <option key={option.id} value={option.id}>{option.name}</option>
                     ))}
                 </Select>
             </SelectContainer>
