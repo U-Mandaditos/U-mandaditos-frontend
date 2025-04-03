@@ -7,7 +7,7 @@ const OfferCardContainer = styled.div`
     justify-content: space-between;
     border: 1px solid ${(props) => props.theme.colors.lineColor};
     font-size: 1rem;
-    background-color: ${(props) => (props.isSelected ? '#e4efee' : props.theme.colors.main)};
+    background-color: ${(props) => (props.isselected ? '#e4efee' : props.theme.colors.main)};
     border-radius: 15px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;    
 `;
@@ -81,12 +81,12 @@ const Star = styled.img`
     height: 20px;
 `;
 
-export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelected = false, onClick }) {
+export default function OfferCard({ postUser, offerInfo, priceSuggested, isSelected, onClick }) {
     const starsFilled = postUser.stars; 
     const starsEmpty = 5 - starsFilled; 
 
     return (
-        <OfferCardContainer isSelected={isSelected} onClick={onClick}>
+        <OfferCardContainer isselected={isSelected} onClick={onClick}>
             <UserContainer>
                 <UserImage src={postUser.image} alt="User" />
                 <UserInfo>
