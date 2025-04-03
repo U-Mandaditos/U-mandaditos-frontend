@@ -21,6 +21,7 @@ export const validateDescription = (description) => {
     if (description.length < 6 || description.length > 100) {
         return "Tu título debe contener al menos 6 caracteres y máximo 100 caracteres"
     }
+    return ''
 }
 
 export const validateRequiredForm = (formData) => {
