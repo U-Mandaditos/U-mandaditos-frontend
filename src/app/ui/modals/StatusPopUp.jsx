@@ -2,7 +2,7 @@ import { FlexContainer } from "../essentials/FlexBox";
 import Modal from "./Modal";
 import Paragraph from "../essentials/Paragraph";
 
-export default function StatusPopUp({response, isOpen, onClose}){
+export default function StatusPopUp({children, response, isOpen, onClose}){
     return (
       <Modal
         isOpen={isOpen}
@@ -10,7 +10,7 @@ export default function StatusPopUp({response, isOpen, onClose}){
         title={response?.title}
         subtitle={response?.subtitle}
       >
-        <FlexContainer alignitems="center">
+        <FlexContainer alignitems="center" className={children && "mb-4"}>
           <img
             style={{ width: "15%", marginRight: "20px" }}
             src={
@@ -19,8 +19,9 @@ export default function StatusPopUp({response, isOpen, onClose}){
                 : "/img/error-image.png"
             }
           />
-          <Paragraph size="18px">{response?.message}</Paragraph>
+          <Paragraph size="18px" text={response?.message}></Paragraph>
         </FlexContainer>
+        {children}
       </Modal>
     );
 }

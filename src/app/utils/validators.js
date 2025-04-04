@@ -92,11 +92,10 @@ export const validateDNI = (dni) => {
   return "";
 };
 
-const validateSqlInjection = (input) => {
-  // Verifica caracteres especiales y palabras reservadas de SQL
-  const sqlInjectionPattern = /['"%;()*<>]/;
-  const sqlKeywordsPattern =
-    /\b(SELECT|INSERT|DELETE|UPDATE|JOIN|MERGE|EXEC|CALL|DROP|UNION|CREATE|ALTER|TRUNCATE|REPLACE)\b/i;
+export const validateSqlInjection = (input) => {
+    // Verifica caracteres especiales y palabras reservadas de SQL
+    const sqlInjectionPattern = /['"%;()*<>]/;
+    const sqlKeywordsPattern = /\b(SELECT|INSERT|DELETE|UPDATE|JOIN|MERGE|EXEC|CALL|DROP|UNION|CREATE|ALTER|TRUNCATE|REPLACE)\b/i;
 
   // Retorna true si encuentra caracteres especiales o palabras clave SQL
   return sqlInjectionPattern.test(input) || sqlKeywordsPattern.test(input);

@@ -12,6 +12,7 @@ import Runner from "/public/img/runner-icon.svg"
 import DeliveryCard from "@/app/ui/cards/DeliveryCard";
 import SlidingPanel from "@/app/ui/utilities/SlidingPanel";
 import OfferCard from "@/app/ui/cards/OfferCard";
+import { useRouter } from "next/navigation";
 
 
 const Container = styled.div`
@@ -78,9 +79,11 @@ const data = {
 }
 
 
-export default function Page() {
+export default function Page({ params }) {
     const theme = useTheme();
     const [offerSelected, setOfferSelected] = useState(null);
+    const router = useRouter();
+
 
     const selectOffer = (id) => {
         setOfferSelected(id);
@@ -108,7 +111,7 @@ export default function Page() {
 
   return (
     <>
-    <Header text={"Tu mandadito"}/> 
+    <Header text={"Tu mandadito"} router={router}/> 
     <FlexContainer className="p-5" direction="column" gap="25px">
     <Title text={"Detalles"}/>
     <FlexContainer direction="column" className="ml-4" gap="15px">

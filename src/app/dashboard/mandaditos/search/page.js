@@ -6,10 +6,8 @@ import { FlexContainer } from "@/app/ui/essentials/FlexBox";
 import Input from "@/app/ui/essentials/Input";
 import Paragraph from "@/app/ui/essentials/Paragraph";
 import Title from "@/app/ui/essentials/Title";
-import Map from "@/app/ui/maps/Map";
 import SlidingPanel from "@/app/ui/utilities/SlidingPanel";
 import LoadingBar from "@/app/ui/ux/LoadingBar";
-import { Marker } from "@react-google-maps/api";
 import { useState } from "react";
 import { useTheme } from "styled-components";
 
