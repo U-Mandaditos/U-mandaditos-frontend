@@ -1,12 +1,10 @@
 import styled from "styled-components"
 
-
 const Label = styled.p`
   color: ${props => props.theme.colors.foreground};
   margin-bottom: 4px;
   font-weight: 500;
 `
-
 const SelectContainer = styled.div`
   width: ${props => props.width || "100%"};
 `
@@ -31,15 +29,16 @@ const SelectStyled = styled.select`
 
 `;
 
-export default function Select({label, value, onChange, defaultOption, optionsList, name, required, width}){
-    return (
-        <SelectContainer width={width}>
-            {label && <Label>{label}</Label>}
-            <SelectStyled value={value} onChange={onChange} name={name} required={required}>
-                {defaultOption && <option value="">{defaultOption}</option>}
-                {optionsList && optionsList.map(option=>
-                    <option key={option.id} value={option.id}>{option.name}</option>)}
-            </SelectStyled>
-        </SelectContainer>
-    )
+export default function Select({ label, value, onChange, defaultOption, optionsList, name, required, width }) {
+  console.log("optionsList", optionsList)
+  return (
+    <SelectContainer width={width}>
+      {label && <Label>{label}</Label>}
+      <SelectStyled value={value} onChange={onChange} name={name} required={required}>
+        {defaultOption && <option value="">{defaultOption}</option>}
+        {optionsList && optionsList.map(option =>
+          <option key={option.id} value={option.id}>{option.name}</option>)}
+      </SelectStyled>
+    </SelectContainer>
+  )
 }

@@ -20,7 +20,7 @@ const StyledInput = styled.input`
   padding: 8px;
   border: 1.4px solid ${(props) => props.theme.colors.lineColor || '#d9d9d9'}; 
   border-radius: 8px;
-  background-color: transparent; 
+  background-color: ${(props) => props.disabled ? props.theme.colors.lineColor : 'transparent'}; 
   outline: none;
   transition: border 0.3s ease;
   color: ${(props) => props.theme.colors.foreground || '#fff'};
@@ -34,7 +34,7 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function Input({ width, label, placeholder, value, onChange, name, required, type, className, ref, defaultValue, accept, labelColor}){
+export default function Input({ width, label, placeholder, value, onChange, name, required, type, className, ref, defaultValue, accept, labelColor, disabled = false}){
   return (
     <InputWrapper className={className} width={width}>
       {label && <InputLabel htmlFor={name} color={labelColor}>{label}</InputLabel>}
@@ -48,6 +48,7 @@ export default function Input({ width, label, placeholder, value, onChange, name
         placeholder={placeholder}
         required={required}
         accept={accept}
+        disabled={disabled}
       />
     </InputWrapper>
   );
