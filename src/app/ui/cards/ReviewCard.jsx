@@ -81,16 +81,15 @@ const Icon = styled.img`
     margin-left: 5px;
 `;
 
-export default function ReviewCard({ postUser, coment, comentDate, isPosted, isSelected }) {
-    console.log(isPosted)
-    const starsFilled = postUser.stars; 
+export default function ReviewCard({ postUser, rating, coment, comentDate, isPosted, isSelected, score }) {
+    const starsFilled = score !== undefined ? score : rating !== undefined ? rating.score : 0; 
     const starsEmpty = 5 - starsFilled;
 
     return (
         <ReviewCardContainer isSelected={isSelected}>
             <Review>
                 <UserContainer>
-                    <UserImage src={postUser.image} alt="User" />
+                    <UserImage src={postUser.profilePicture} alt="User" />
                     <UserInfo>
                         <p>{postUser.name}</p>
                         <StarsContainer>

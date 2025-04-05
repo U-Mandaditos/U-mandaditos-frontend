@@ -7,17 +7,18 @@ import Input from "../ui/essentials/Input"
 import Paragraph from "../ui/essentials/Paragraph"
 import Link from "../ui/essentials/Link"
 import TitleHeader from "../ui/utilities/TitleHeader"
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { API_URL } from '@/app/utils/settings'
 import { useRouter } from 'next/navigation';
 import { validateEmail } from '../utils/validators';
+import PasswordInput from '../ui/essentials/InputPassword';
 
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     padding: 2rem;
 `;
 
@@ -29,6 +30,7 @@ export default function Page() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
     
     const validatePassword = (password) => {
         if (!password) return 'La contraseña es requerida';
@@ -70,15 +72,15 @@ export default function Page() {
             return "0.0.0.0"; 
         }
     };
-
-    
+ 
     const getDeviceInfo = () => {
         return navigator.userAgent || "Desconocido";
     };
-    
 
     const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isLogin) return;
+    setLoading(true);
     setLogginError('');
     setIsLogin(true);
 
@@ -107,12 +109,14 @@ export default function Page() {
         );
     } finally {
         setIsLogin(false);
+        setLoading(false);
     }
     };
     
 
     return (
         <>
+            
             <TitleHeader title={"Inicia sesión"} text={"Bienvenido de vuelta a U-Mandaditos"} />
             <StyledForm onSubmit={handleSubmit}> 
                 <Input 
@@ -122,20 +126,21 @@ export default function Page() {
                     name={"email"} 
                     required={true} 
                     type={"email"} 
-                    width={"314px"} 
                     placeholder="e.g afcastillof@unah.hn" 
+                    disabled={loading}
                 />
                 {emailError && <Paragraph color="red" size="14px" text={emailError}/>}
-                <div>
-                    <Input 
+                <div className='w-full'>
+                    <PasswordInput 
                         onChange={e => setPassword(e.target.value)} 
                         label={"Contraseña"} 
                         value={password} 
                         name={"password"} 
                         type={"password"} 
                         required={true} 
-                        width={"314px"} 
                         placeholder="Ingresa tu contraseña" 
+                        className={'mb-3'}
+                        disabled={loading}
                     />
                     <Link 
                         text={"¿Olvidaste tu contraseña?"} 
@@ -143,7 +148,8 @@ export default function Page() {
                         size={"13px"} 
                         weight={"400"} 
                         float={"right"} 
-                        href={"#"} 
+                        href={"/forgot-password"} 
+                        className="mt-4"
                     />
                 </div>   
                 <FlexContainer direction="column" alignitems="center">
@@ -151,7 +157,7 @@ export default function Page() {
                         disabled={isLogin} 
                         type='submit' 
                         borderRadius={"30px"} 
-                        width={"300px"} 
+                        width={"90%"} 
                         text={isLogin ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                     />
                 </FlexContainer>   
@@ -171,23 +177,7 @@ export default function Page() {
                         weight={"600"} 
                         float={"none"} 
                     />
-                </FlexContainer>  
-                <FlexContainer direction="row" alignitems={"center"} justifycontent="center" gap="5px">
-                    <Paragraph 
-                        color={theme.colors.secondaryText} 
-                        weight={"600"} 
-                        size={"13px"} 
-                        text={"Regresar a "}
-                    /> 
-                    <Link 
-                        href="/" 
-                        text={"la página principal"} 
-                        color={theme.colors.primary} 
-                        size={"13px"} 
-                        weight={"600"} 
-                        float={"none"} 
-                    />
-                </FlexContainer>      
+                </FlexContainer>    
             </StyledForm>
         </>
     );

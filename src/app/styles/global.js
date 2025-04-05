@@ -27,6 +27,10 @@ export const GlobalStyle = createGlobalStyle`
   margin-right: auto;
 }
 
+.w-full {
+  width: 100%;
+}
+
 
   ${({ theme }) => Object.entries(theme.spacing).map(
     ([key, value]) => `

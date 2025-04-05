@@ -1,11 +1,14 @@
+'use client';
+
 import DeliveryCard from "@/app/ui/cards/DeliveryCard";
 import ReviewCard from "@/app/ui/cards/ReviewCard";
 import Button from "@/app/ui/essentials/Button";
 import { FlexContainer } from "@/app/ui/essentials/FlexBox";
 import Paragraph from "@/app/ui/essentials/Paragraph";
-
+import styled, { useTheme } from "styled-components";
+import Header from "@/app/ui/utilities/Header";
+import Title from "@/app/ui/essentials/Title";
 import { useRouter } from "next/navigation";
-
 
 const Icon = styled.svg`
   width: ${(props) => props.width || '14px'};
@@ -15,8 +18,17 @@ const Icon = styled.svg`
   }
 `;
 
+const PageContainer = styled.div`
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export default function Mandadito(){
     const router = useRouter();
+    const theme = useTheme();
 
     const delivery = {
             pickUpLocation: "B2",
