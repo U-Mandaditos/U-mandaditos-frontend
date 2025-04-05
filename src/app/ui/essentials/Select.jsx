@@ -22,19 +22,14 @@ const SelectStyled = styled.select`
     border: 1.4px solid ${props => props.theme.colors.primary};
     outline: none;
   }
-
-  &[required]:invalid {
-    border-color: red;
-  }
-
 `;
 
-export default function Select({ label, value, onChange, defaultOption, optionsList, name, required, width }) {
+export default function Select({ label, value, onChange, defaultOption, optionsList, name, required, width, disabled }) {
   console.log("optionsList", optionsList)
   return (
     <SelectContainer width={width}>
       {label && <Label>{label}</Label>}
-      <SelectStyled value={value} onChange={onChange} name={name} required={required}>
+      <SelectStyled value={value} onChange={onChange} name={name} required={required} disabled={disabled}>
         {defaultOption && <option value="">{defaultOption}</option>}
         {optionsList && optionsList.map(option =>
           <option key={option.id} value={option.id}>{option.name}</option>)}

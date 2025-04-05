@@ -83,12 +83,7 @@ export const validateDNI = (dni) => {
   if (isNaN(dni)) {
     return "Dato inválido";
   }
-  /* verifica si tiene 13 digitos */
-  const dniPattern = /^\d{13}$/;
-  if (!dniPattern.test(dni)) {
-    return "Dato inválido";
-  }
-
+  
   return "";
 };
 

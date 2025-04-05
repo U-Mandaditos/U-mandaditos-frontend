@@ -16,7 +16,7 @@ const InputLabel = styled.label`
 const StyledInput = styled.input`
   height: 40px;
   font-size: 16px;
-  padding: 8px;
+  padding: 21px 8px;
   border: 1.4px solid ${(props) => props.theme.colors.lineColor || '#d9d9d9'}; 
   border-radius: 8px;
   background-color: ${(props) => props.disabled ? props.theme.colors.lineColor : 'transparent'}; 
@@ -26,10 +26,6 @@ const StyledInput = styled.input`
 
   &:focus {
     border-color: ${(props) => props.theme.colors.primary || '#f8f8f8'};
-  }
-
-  &[required]:invalid {
-    border-color: red;
   }
 `;
 

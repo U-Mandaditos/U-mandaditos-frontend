@@ -14,7 +14,7 @@ export const NotificationProvider = ({ children }) => {
     setNotification({ message, type, duration });
 
     setTimeout(() => {
-      setNotification(null); // Limpiar la notificación después de que termine el tiempo
+      setNotification(null);
     }, duration);
   };
 
@@ -23,8 +23,9 @@ export const NotificationProvider = ({ children }) => {
       {children}
       {notification && (
         <GlobalNotification
-          message={notification.message}  // Pasar solo el mensaje y el tipo
+          message={notification.message} 
           type={notification.type}
+          duration={notification.duration}
         />
       )}
     </NotificationContext.Provider>

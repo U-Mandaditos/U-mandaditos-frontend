@@ -15,6 +15,7 @@ import {
 } from "../utils/validators";
 import { useRouter } from "next/navigation";
 import { useNotification } from "../contexts/NotificationContext";
+import { API_URL } from "../utils/settings";
 
 const StyledForm = styled.form`
   display: flex;
@@ -90,13 +91,14 @@ export default function Page() {
       return;
     }
 
-    const data = await apiRequest("http://localhost:8080/api/management/pwd", "POST", { email: inputs.email });
+    const data = await apiRequest(`${API_URL}/api/management/pwd`, "POST", { email: inputs.email });
 
     if (data.success) {
       setPages({ verifyEmail: false, verifyCode: true, changePassword: false });
       setId(data.data.idManagement);
       setIdUser(data.data.idUser);
     } else {
+      console.error("Error:", data.message);
       setFieldError("email", data.message);
     }
   };
@@ -107,7 +109,7 @@ export default function Page() {
 
     setFieldError("code", "");
 
-    const data = await apiRequest(`http://localhost:8080/api/management/${id}/compare`, "PATCH", { code: inputs.code });
+    const data = await apiRequest(`${API_URL}/api/management/${id}/compare`, "PATCH", { code: inputs.code });
 
     if (data.success) {
       setPages({ verifyEmail: false, verifyCode: false, changePassword: true });
@@ -134,13 +136,13 @@ export default function Page() {
       return;
     }
 
-    const data = await apiRequest("http://localhost:8080/api/user/password", "PATCH", {
+    const data = await apiRequest(`${API_URL}/api/user/password`, "PATCH", {
       id: idUser,
       password: inputs.password,
     });
 
     if (data.success) {
-      notify("Contraseña cambiada con éxito", "success");
+      notify("Contraseña cambiada con éxito", "success", 5000);
       router.push("/login");
     } else {
       setFieldError("password", data.message);

@@ -12,6 +12,7 @@ import { useTheme } from "styled-components";
 import { useEffect, useState } from "react";
 import { useNotification } from "../contexts/NotificationContext";
 import { useRouter } from "next/navigation";
+import { API_URL } from "../utils/settings";
 
 import {
   validateConfirmPassword,
@@ -30,6 +31,13 @@ const StyledForm = styled.form`
   align-items: center;
   gap: 2rem;
   padding: 2rem;
+`;
+
+const PreviewImage = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 10px;
 `;
 
 export default function Page() {
@@ -70,7 +78,7 @@ export default function Page() {
 
   const fetchCareers = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/careers", {
+      const response = await fetch(`${API_URL}/api/careers`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +97,7 @@ export default function Page() {
 
   const sendUserData = async (formData) => {
     try {
-      const response = await fetch("http://localhost:8080/api/user", {
+      const response = await fetch(`${API_URL}/api/user`, {
         method: "POST",
         body: formData,
       });
@@ -118,6 +126,7 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsRegistring(true);
+    console.log("registrando...", isRegistring);
 
     // Validaciones simplificadas
     const validationErrors = {
@@ -164,9 +173,9 @@ export default function Page() {
 
       if (response.success) {
         notify(
-          "Registro exitoso. Inicia sesión para continuar",
+          "Tu cuenta ha sido creada con éxito, inicia sesión para continuar",
           "success",
-          3000
+          5000
         );
         router.push("/login");
         return;
@@ -179,6 +188,7 @@ export default function Page() {
         registerError: error.message,
       });
     } finally {
+      console.log("registrando...", isRegistring);
       setIsRegistring(false);
     }
   };
@@ -190,7 +200,7 @@ export default function Page() {
         text={"Completa tus datos personales para empezar"}
       />
       <StyledForm onSubmit={handleSubmit}>
-        <div>
+        <div className={'w-full'}>
           <Input
             label={"Nombre Completo"}
             value={formData.name}
@@ -198,7 +208,7 @@ export default function Page() {
             name={"name"}
             required={true}
             type={"text"}
-            width={"324px"}
+            
             placeholder="e.g Daniel Alexander Ochoa"
             disabled={isRegistring}
           />
@@ -210,7 +220,7 @@ export default function Page() {
           )}
         </div>
 
-        <div>
+        <div className={'w-full'}>
           <Input
             label={"Correo"}
             name={"email"}
@@ -218,8 +228,9 @@ export default function Page() {
             onChange={handleChangeInput}
             required={true}
             type={"email"}
-            width={"324px"}
+            
             placeholder="e.g dochoao@gmail.com"
+            disabled={isRegistring}
           />
           {errors.email && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
@@ -229,7 +240,7 @@ export default function Page() {
           )}
         </div>
 
-        <div>
+        <div className={'w-full'}>
           <Input
             label={"Fecha de Nacimiento"}
             value={formData.dateOfBirth}
@@ -237,8 +248,9 @@ export default function Page() {
             name={"dateOfBirth"}
             required={true}
             type={"date"}
-            width={"324px"}
+            
             placeholder="DD/MM/YYYY"
+            disabled={isRegistring}
           />
           {errors.dateOfBirth && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
@@ -249,7 +261,7 @@ export default function Page() {
         </div>
 
         {/* DNI */}
-        <div>
+        <div className={'w-full'}>
           <Input
             label={"DNI (Pasaporte para extranjeros)"}
             value={formData.dni}
@@ -257,8 +269,9 @@ export default function Page() {
             name={"dni"}
             required={true}
             type={"number"}
-            width={"324px"}
+            
             placeholder="e.g 12345678"
+            disabled={isRegistring}
           />
           {errors.dni && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
@@ -268,16 +281,18 @@ export default function Page() {
           )}
         </div>
 
-        <div>
+        <div className={'w-full'}>
           <Select
             label={"Carrera"}
             name={"career"}
             value={formData.career}
             onChange={handleChangeInput}
             required={true}
-            width={"324px"}
+            
             optionsList={optionsList}
             defaultOption={"Seleccione"}
+            placeholder="e.g Ingeniería de Sistemas"
+            disabled={isRegistring}
           />
           {errors.career && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
@@ -287,7 +302,7 @@ export default function Page() {
           )}
         </div>
 
-        <div>
+        <div className={'w-full'}>
           <Input
             label={"Contraseña"}
             name={"password"}
@@ -295,8 +310,9 @@ export default function Page() {
             onChange={handleChangeInput}
             type={"password"}
             required={true}
-            width={"324px"}
+            
             placeholder="Crea una contraseña segura"
+            disabled={isRegistring}
           />
           {errors.password && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
@@ -306,7 +322,7 @@ export default function Page() {
           )}
         </div>
 
-        <div>
+        <div className={'w-full'}>
           <Input
             label={"Confirmar contraseña"}
             name={"confirmPassword"}
@@ -314,8 +330,9 @@ export default function Page() {
             onChange={handleChangeInput}
             type={"password"}
             required={true}
-            width={"324px"}
+            
             placeholder="Confirma tu contraseña"
+            disabled={isRegistring}
           />
           {errors.confirmPassword && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
@@ -325,23 +342,32 @@ export default function Page() {
           )}
         </div>
 
-        <div>
+        <FlexContainer direction="column" gap="10px" alignitems={"center"}>
           <Input
             label={"Foto de perfil"}
             name={"profilePic"}
             onChange={handleUploadFile}
             type={"file"}
             required={true}
-            width={"324px"}
+            
             placeholder="Sube tu foto"
+            accept="image/*"
+            disabled={isRegistring}
           />
+          {/* previsualizador */}
+          {formData.profilePic && (
+            <PreviewImage
+              src={URL.createObjectURL(formData.profilePic)}
+              alt="Visualizador de imagen"
+            />
+          )}
           {errors.profilePic && (
             <p style={{ color: "red", size: "14px", float: "left" }}>
               {" "}
               {errors.profilePic}{" "}
             </p>
           )}
-        </div>
+        </FlexContainer>
 
         <FlexContainer
           width="100%"
@@ -352,7 +378,7 @@ export default function Page() {
             disabled={isRegistring}
             type="submit"
             borderRadius={"30px"}
-            width={"300px"}
+            width={"90%"}
             text={isRegistring ? "Registrando..." : "Registrar"}
           />
         </FlexContainer>
@@ -383,28 +409,7 @@ export default function Page() {
             float={"none"}
           />
         </FlexContainer>
-        <FlexContainer
-          direction="row"
-          alignitems={"center"}
-          justifycontent="center"
-          gap="5px"
-        >
-          <Paragraph
-            color={theme.colors.secondaryText}
-            weight={"600"}
-            size={"13px"}
-            text={"Regresar a "}
-          />
-          <Link
-            href="/"
-            text={"la página principal"}
-            color={theme.colors.primary}
-            size={"13px"}
-            weight={"600"}
-            float={"none"}
-          />
-        </FlexContainer>
-      </StyledForm>
+       </StyledForm>
     </>
   );
 }
