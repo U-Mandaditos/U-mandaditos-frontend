@@ -70,6 +70,7 @@ const StatusCard = styled.div`
 
 export default function DeliveryCard ({pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, runnerName, status, price, ActionButton }) {
     const theme = useTheme();
+    const numericPrice = parseFloat(price);
     return (
         <ContainerGeneral>
             <FlexContainer width={"75%"} height="100%" direction="column" gap="2px">
@@ -99,7 +100,9 @@ export default function DeliveryCard ({pickUpLocation, deliveryLocation, deliver
             </FlexContainer>
             <FlexContainer direction="column" alignitems="flex-end" gap="3px">
                 <TextCard color={theme.colors.foreground} weight="500" size="16px">{deliveryHour}</TextCard>
-                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">L. {price}.00</TextCard>
+                <TextCard color={theme.colors.secondaryText} weight="400" size="12px">
+                    L. {numericPrice.toFixed(2)}
+                    </TextCard>
                 <FlexContainer alignitems="flex-end" justifycontent="flex-end" height="100%">
                     <Button text={"Ver"} width={"58%"} paddingx={"8px"} paddingy={"4px"} fontSize={"10px"} height="50%" className={"mb-3"} onClick={ActionButton}></Button>
                 </FlexContainer>

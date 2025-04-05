@@ -137,7 +137,7 @@ export default function Home() {
                         <Title text={`Hola ${user.name || "..."}`} />
                         <Paragraph text="Bienvenido a U-mandaditos" color={theme.colors.secondaryText}/>
                     </FlexContainer>
-                    <UserImage src={user.profilePic || dataa.userImage} alt="Foto de perfil" />
+                    <UserImage onClick={() => {router.push('/dashboard/profile')}} src={user.profilePic || dataa.userImage} alt="Foto de perfil" />
                 </FlexContainer>
 
                 <LocationSelect text="¿Donde estás?" optionList={locations} onChange={(e) => changeLocation(e.target.value)}/>

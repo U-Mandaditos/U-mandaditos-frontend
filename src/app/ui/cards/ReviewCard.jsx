@@ -81,8 +81,8 @@ const Icon = styled.img`
     margin-left: 5px;
 `;
 
-export default function ReviewCard({ postUser, rating, coment, comentDate, isPosted, isSelected }) {
-    const starsFilled = rating; 
+export default function ReviewCard({ postUser, rating, coment, comentDate, isPosted, isSelected, score }) {
+    const starsFilled = score !== undefined ? score : rating !== undefined ? rating.score : 0; 
     const starsEmpty = 5 - starsFilled;
 
     return (

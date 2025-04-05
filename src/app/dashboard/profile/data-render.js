@@ -2,12 +2,12 @@ export const buttonLinks = [
     {
         text: "Tus Mandaditos",
         icon: "/icons/mandaditohistory-icon.svg",
-        href: "/dashboard/post/history"
+        href: "/dashboard/mandaditos/history"
     },
     {
         text: "Tus Entregas",
         icon: "/icons/entregashistory-icon.svg",
-        href: "/dashboard/delivery/history"
+        href: "/dashboard/order/history"
     },
     {
         text: "Tus Reseñas",

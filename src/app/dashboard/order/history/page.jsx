@@ -2,120 +2,38 @@
 
 import Header from "@/app/ui/utilities/Header";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DeliveryListByDate from "@/app/ui/utilities/DeliveryListByDate";
-
-const data = [
-    {
-        date: Date.now(),
-        mandaditos: {
-            locations: [
-                {
-                    key: 1,
-                    name: "B2"
-                },
-                {
-                    key: 2,
-                    name: "Polideportivo"
-                }
-            ],
-            deliverys: [
-                {
-                    key: 1,
-                    pickUpLocation: "B2",
-                    deliveryLocation: "Polideportivo",
-                    deliveryHour: "3:00 pm",
-                    deliveryTitle: "Alitas del CC",
-                    runnerName: "Angel Fernando Castillo",
-                    status: 1,
-                    price: "L 20.00"
-                },
-                {
-                    key: 2,
-                    pickUpLocation: "B2",
-                    deliveryLocation: "Polideportivo",
-                    deliveryHour: "3:00 pm",
-                    deliveryTitle: "Alitas del CC",
-                    runnerName: "Angel Fernando Castillo",
-                    status: 2,
-                    price: "L 20.00"
-                }
-            ]
-        }
-    },
-    {
-        date: new Date(2025, 1, 28),
-        mandaditos: {
-            locations: [
-                {
-                    key: 1,
-                    name: "B2"
-                },
-                {
-                    key: 2,
-                    name: "Polideportivo"
-                }
-            ],
-            deliverys: [
-                {
-                    key: 2,
-                    pickUpLocation: "B2",
-                    deliveryLocation: "Polideportivo",
-                    deliveryHour: "3:00 pm",
-                    deliveryTitle: "Alitas del CC",
-                    runnerName: "Angel Fernando Castillo",
-                    status: 2,
-                    price: "L 20.00"
-                }
-            ]
-        }
-    },
-    {
-        date: new Date(2025, 1, 1),
-        mandaditos: {
-            locations: [
-                {
-                    key: 1,
-                    name: "B2"
-                },
-                {
-                    key: 2,
-                    name: "Polideportivo"
-                }
-            ],
-            deliverys: [
-                {
-                    key: 1,
-                    pickUpLocation: "B2",
-                    deliveryLocation: "Polideportivo",
-                    deliveryHour: "3:00 pm",
-                    deliveryTitle: "Alitas del CC",
-                    runnerName: "Angel Fernando Castillo",
-                    status: 1,
-                    price: "L 20.00"
-                },
-                {
-                    key: 2,
-                    pickUpLocation: "B2",
-                    deliveryLocation: "Polideportivo",
-                    deliveryHour: "3:00 pm",
-                    deliveryTitle: "Alitas del CC",
-                    runnerName: "Angel Fernando Castillo",
-                    status: 2,
-                    price: "L 20.00"
-                }
-            ]
-        }
-    }
-]
+import { getHistory } from "./services";
 
 export default function Page() {
     const router = useRouter();
+    const [history, setHistory] = useState([]);
+
+    useEffect(()=>{
+        const fetchHistory = async ()=>{
+            const token = localStorage.getItem('token')
+            if (!token) {
+                router.push('/login')
+                return
+            }
+
+            try {
+                const data = await getHistory(token);
+                setHistory(Array.isArray(data) ? data : []); 
+                console.log(data);
+            } catch (error) {
+                console.error("Error fetching history:", error);
+                setHistory([]);
+            } 
+        }
+        fetchHistory();
+    }, [router]);
 
     return (
         <>
         <Header router={router} text={"Tus entregas"}/>
-        <DeliveryListByDate data={data}/>
+        <DeliveryListByDate data={history}/>
         </>
     )
 }
