@@ -16,14 +16,12 @@ import { Marker } from "@react-google-maps/api";
 import { LoaderSpin } from "@/app/ui/ux/LoadingSpin";
 import StatusPopUp from "@/app/ui/modals/StatusPopUp";
 import { useRouter } from "next/navigation";
+import { connectSignalR } from "./signalrService";
+import Image from "next/image";
 
 export default function Page(){
+    //Utilidades
     const theme = useTheme();
-    const [errorMessage, setErrorMessage] = useState('');
-    const [isOpenPopup, setIsOpenPopup] = useState(false);
-    const [responsePopup, setResponsePopup] = useState({});
-    const [price, setPrice] = useState(null);
-    const [isCounterOffer, setIsCounterOffer] = useState(false);
     const router = useRouter();
 
     //Comportamiento
@@ -35,6 +33,10 @@ export default function Page(){
       };
     const [locationSelected, setLocationSelected] = useState(1);
     const [postSelected, setPostSelected] = useState({});
+    const [price, setPrice] = useState(null);
+    const [isCounterOffer, setIsCounterOffer] = useState(false);
+    const [socketConnection, setSocketConnection] = useState(null);
+    const [isAccepted, setIsAccepted] = useState(false);
 
     //Data
     const [locations, setLocations] = useState([]);
@@ -42,6 +44,9 @@ export default function Page(){
 
     //UX
     const [isLoading, setIsLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isOpenPopup, setIsOpenPopup] = useState(false);
+    const [responsePopup, setResponsePopup] = useState({});
 
     const fetchPosts = async (locationId)=>{
         setIsLoading(true);
@@ -105,9 +110,13 @@ export default function Page(){
 
         //Peticion al Backend
         try {
-            console.log(dataToSend)
-        const {success, message}  = await createOffer(dataToSend, token);
+
+        const {data, success, message}  = await createOffer(dataToSend, token);
+
+        const offer = data; //Se guarda la offer retornada
+
         if (success==true) {
+
             setResponsePopup({
                 title: "Acción Exitosa",
                 subtitle: "Se ha realizado la acción de forma satisfactoria",
@@ -115,7 +124,23 @@ export default function Page(){
                 message: message
             })
             setIsOpenPopup(true);
-            setStep(2);
+            setStep(2); //Se pasa al paso de espera
+
+            const connection = await connectSignalR(); //Se crea una conexion con el webSocket
+
+            if (!connection) { //Se verifica la conexion
+                throw new Error("Ocurrio un error al comunicarse con el websocket");
+            }
+
+            setSocketConnection(connection); //Se guarda la conexion
+            
+            await connection.invoke("JoinPostGroup", postSelected.id.toString()); //Se une al grupo con el id de post
+
+            connection.on("GetOfferState", (response)=>{  //Cuando responde el backend (Se acepto una offer)
+                setIsAccepted(parseInt(response.offerId) == offer.id); //Se verifica si coincide con la oferta del usuario
+                setStep(3);
+            })
+
         }else{
             setResponsePopup({
                 title: "Acción Fallida",
@@ -191,6 +216,26 @@ export default function Page(){
             <Paragraph text={postSelected.description}/>
             </div>
             <Button text={"Cancelar solicitud"} className={"mt-3"} onClick={() => {cancelRequest()}}></Button>
+        </FlexContainer>),
+        3: (<FlexContainer direction="column" gap="20px">
+            <FlexContainer direction="column" alignitems="center">
+            <Image src={isAccepted ? "/icons/user-running.svg" : "/icons/user-sad.svg"} width={50} height={50} alt="user-running"></Image>
+            <Paragraph align={"center"} className={"mt-2"} size={"20px"} weight={600} text={isAccepted ? "Tu solicitud ha sido aceptada. ¡puedes iniciar el recorrido!" :"Lo sentimos, el Poster no ha aceptado tu solicitud"}></Paragraph>
+            </FlexContainer>
+            <PostDeliveryCard
+                deliveryTitle={postSelected.title}
+                pickUpLocation={postSelected.pickUpLocation}
+                deliveryLocation={postSelected.deliveryLocation}
+                deliveryHour={postSelected.createdAt}
+                posterName={postSelected.posterUserName}
+                price={postSelected.suggestedValue}
+                isSelected={true}
+                bottomText={counterOffer}/>
+            <div>
+            <Title text={"Descripción"}/>
+            <Paragraph text={postSelected.description}/>
+            </div>
+            <Button text={isAccepted ? "Empezar Mandadito" : "Volver a buscar"} className={"mt-3"}></Button>
         </FlexContainer>)
     }
 
