@@ -11,6 +11,9 @@ import PostIcon from "/public/icons/post-icon.svg"
 import Button from "@/app/ui/essentials/Button";
 import { buttonLinks } from "./data-render";
 import AccessButton from "@/app/ui/navigation/AccessButton";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "@/app/ui/essentials/Loader";
+import { API_URL } from "@/app/utils/settings";
 
 const Divider = styled.hr`
   border: 0;
@@ -20,6 +23,80 @@ const Divider = styled.hr`
 `;
 
 export default function Page(){
+
+    const [error, setError] = useState(null);
+    const [dataUser, setDataUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const router = useRouter();
+    const theme = useTheme();
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const token = localStorage.getItem('token');
+
+                if (!token) {
+                    setError("No se ha encontrado el token de autenticación.");
+                    setIsLoading(false);
+                    router.push("/login"); // Redirige al usuario a la página de inicio de sesión
+                    return;
+                }
+
+                const response = await fetch(`${API_URL}/api/user/privateProfile`, { 
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error al obtener los datos del usuario.");
+                }
+
+                const data = await response.json();
+                
+            console.log(data);
+                const userData = data.data;
+
+                setDataUser({
+                    user: {
+                        name: userData.user.name,
+                        image: userData.user.profilePic.link, 
+                        stars: userData.user.score,  
+                        carreer: userData.user.career.name,  
+                        age: userData.user.edad 
+                    },
+                    stats: {
+                        deliveries: userData.stats.deliveries,
+                        post: userData.stats.posts
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setError("Error al cargar los datos del usuario.");
+                router.push("/login");
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchData();
+    }, []); 
+
+    if (isLoading) {
+        return <LoadingSpinner />; 
+    }
+
+    if (error) {
+        return <div>{error}</div>; 
+    }
+
+    // Accediendo a los datos del usuario
+    const { user, stats } = dataUser;
+    console.log(user);
 
     const data = {
         user: {
@@ -35,22 +112,19 @@ export default function Page(){
         }
     }
 
-    const router = useRouter();
-    const theme = useTheme();
-
     return (<>
         <Header text={"Tu perfil"} router={router}></Header>
 
         <div className="px-5 mb-5">
             {/**Nombre, estrellas e informacion del usuario */}
-            <UserCard user={data.user}></UserCard>
-            <Paragraph text={"Ingeniería en Sistemas"} weight={600} className={"mt-3"} color={theme.colors.secondaryText}></Paragraph>
+            <UserCard user={user}></UserCard>
+            <Paragraph text={user.carreer.name} weight={600} className={"mt-3"} color={theme.colors.secondaryText}></Paragraph>
             <Paragraph text={`${data.user.age} Años`} weight={600} className={"mt-1"} color={theme.colors.secondaryText}></Paragraph>
             
             {/**Estadisticas de cantidad de entregas y pedidos hechos por el usuario */}
             <FlexContainer className="mt-4" justifycontent="center">
-                <IconTextCard icon={DeliveryIcon} text={`${data.stats.deliveries} Entregas`} className={"mr-5"}></IconTextCard>
-                <IconTextCard icon={PostIcon} text={`${data.stats.post} Pedidos`} color={theme.colors.primaryLight}></IconTextCard>
+                <IconTextCard icon={DeliveryIcon} text={`${stats.deliveries} Entregas`} className={"mr-5"}></IconTextCard>
+                <IconTextCard icon={PostIcon} text={`${stats.post} Pedidos`} color={theme.colors.primaryLight}></IconTextCard>
             </FlexContainer>
 
             {/**Estadisticas botón de editar perfil */}
