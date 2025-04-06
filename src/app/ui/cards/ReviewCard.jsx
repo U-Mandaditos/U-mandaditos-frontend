@@ -81,15 +81,15 @@ const Icon = styled.img`
     margin-left: 5px;
 `;
 
-export default function ReviewCard({ postUser, rating, coment, comentDate, isPosted, isSelected, score }) {
-    const starsFilled = score !== undefined ? score : rating !== undefined ? rating.score : 0; 
+export default function ReviewCard({ ratedUser, postUser, rating, coment, comentDate, isPosted, isSelected, score }) {
+    const starsFilled = score !== undefined ? score : rating !== undefined ? rating : 0; 
     const starsEmpty = 5 - starsFilled;
 
     return (
         <ReviewCardContainer isSelected={isSelected}>
             <Review>
                 <UserContainer>
-                    <UserImage src={postUser.profilePicture} alt="User" />
+                    <UserImage src={postUser.image} alt="User" />
                     <UserInfo>
                         <p>{postUser.name}</p>
                         <StarsContainer>
@@ -111,7 +111,7 @@ export default function ReviewCard({ postUser, rating, coment, comentDate, isPos
             <DateParagraph>{comentDate}</DateParagraph>
             {isPosted !== undefined && (
                 <PostParagraph isPosted={isPosted}>
-                    {postUser.name} {isPosted ? "posteó un mandadito." : "hizo un mandadito."} 
+                    {ratedUser} {isPosted ? "posteó un mandadito." : "hizo un mandadito."} 
                     <Icon src={isPosted ? "/icons/post.svg" : "/icons/man_walking.svg"} />
                 </PostParagraph>
             )}
