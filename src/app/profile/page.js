@@ -34,7 +34,7 @@ export default function Page() {
                     return;
                 }
 
-                const response = await fetch(`${API_URL}/api/user/publicProfile`, {
+                const response = await fetch(`${API_URL}/api/user/publicProfile/${1020}`, { // Aqui va el id del usuario...
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -48,7 +48,6 @@ export default function Page() {
 
                 const data = await response.json();
                 
-        console.log(data);
                 const userData = data.data;
 
                 setDataUser({
