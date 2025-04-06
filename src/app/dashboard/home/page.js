@@ -80,14 +80,14 @@ export default function Home() {
     const [selectedLocation, setSelectedLocation] = useState(null);
 
     const navigate = (id) => {
-        router.push(`/dashboard/delivery-detail/${id}`)
+        router.push(`/dashboard/post/${id}`)
     }
 
     const changeLocation = (idLocation) => {
         setSelectedLocation(idLocation);
         localStorage.setItem("idLocation", idLocation);
     }
-     
+
     const createMandadito = () => {
         router.push("/dashboard/post/create")
     }
@@ -104,10 +104,11 @@ export default function Home() {
                 const response = await getUser(token);
                 const location = await getLocations(token);
                 const post = await getPosts(token);
+                console.log("post", post);
                 if (response) {
                     const fullName = response.data.name || "";
                     const firstName = fullName.split(" ")[0];
-                    
+
                     setUser({
                         ...response.userObject,
                         name: firstName || "Usuario",
@@ -116,7 +117,7 @@ export default function Home() {
                     setLocations(location.data);
                     setPosts(post);
 
-                    
+
                     console.log(response);
                 }
             } catch (error) {
@@ -135,51 +136,59 @@ export default function Home() {
                 <FlexContainer direction="row">
                     <FlexContainer direction="column">
                         <Title text={`Hola ${user.name || "..."}`} />
-                        <Paragraph text="Bienvenido a U-mandaditos" color={theme.colors.secondaryText}/>
+                        <Paragraph text="Bienvenido a U-mandaditos" color={theme.colors.secondaryText} />
                     </FlexContainer>
-                    <UserImage onClick={() => {router.push('/dashboard/profile')}} src={user.profilePic || dataa.userImage} alt="Foto de perfil" />
+                    <UserImage onClick={() => { router.push('/dashboard/profile') }} src={user.profilePic || dataa.userImage} alt="Foto de perfil" />
                 </FlexContainer>
 
-                <LocationSelect text="¿Donde estás?" optionList={locations} onChange={(e) => changeLocation(e.target.value)}/>
+                <LocationSelect text="¿Donde estás?" optionList={locations} onChange={(e) => changeLocation(e.target.value)} />
 
                 <Card>
                     <FlexContainer direction="column" width="70%" gap="1px">
-                        <Paragraph text="¿Quieres postear" size="12px"/>
-                        <Title text="Un mandadito?" size="20px" weight="500"/>
-                        <Paragraph text="Siéntate y encuentra el mejor runner." size="10px" color={theme.colors.secondaryText}/>
-                        <Button 
-                            text="Crea un mandadito" 
-                            width="75%" 
-                            fontSize="10px" 
-                            paddingx="3px" 
-                            paddingy="8px" 
+                        <Paragraph text="¿Quieres postear" size="12px" />
+                        <Title text="Un mandadito?" size="20px" weight="500" />
+                        <Paragraph text="Siéntate y encuentra el mejor runner." size="10px" color={theme.colors.secondaryText} />
+                        <Button
+                            text="Crea un mandadito"
+                            width="75%"
+                            fontSize="10px"
+                            paddingx="3px"
+                            paddingy="8px"
                             className="mt-2"
-                            onClick={() => {createMandadito()}}
+                            onClick={() => { createMandadito() }}
                         />
                     </FlexContainer>
                     <Icon as={Image} />
                 </Card>
 
                 <FlexContainer direction="column" gap="5px">
-                    <Title text="Tus mandaditos posteados" weight="450" size="20px" className="mb-2"/>
-                    {posts.map((delivery) =>
-                        <DeliveryCard 
-                            key={delivery.id}
-                            pickUpLocation={delivery.pickUpLocation} 
-                            deliveryLocation={delivery.deliveryLocation}
-                            deliveryHour={delivery.createdAt} 
-                            deliveryTitle={delivery.title}
-                            runnerName={delivery.runnerName}
-                            status={delivery.status}
-                            price={delivery.suggestedValue} 
-                            ActionButton={() => {navigate(delivery.id)}}
-
+                    <Title text="Tus mandaditos posteados" weight="450" size="20px" className="mb-2" />
+                    {posts.length === 0 ? (
+                        <Paragraph
+                            text="No tienes mandaditos en curso"
+                            size="12px"
+                            color={theme.colors.secondaryText}
+                            className="text-center"
                         />
-                    )} 
+                    ) : (
+                        posts.map((delivery) => (
+                            <DeliveryCard
+                                key={delivery.id}
+                                pickUpLocation={delivery.pickUpLocation}
+                                deliveryLocation={delivery.deliveryLocation}
+                                deliveryHour={delivery.createdAt}
+                                deliveryTitle={delivery.title}
+                                runnerName={delivery.posterUserName}
+                                status={delivery.status}
+                                price={delivery.suggestedValue}
+                                ActionButton={() => navigate(delivery.id)}
+                            />
+                        ))
+                    )}
                 </FlexContainer>
-                
+
                 <FlexContainer direction="column" gap="5px">
-                    <Title text="Encuentra mandaditos cerca de ti" weight="450" size="20px" className="mb-2"/>
+                    <Title text="Encuentra mandaditos cerca de ti" weight="450" size="20px" className="mb-2" />
                     <img src="/img/img-map.png" alt="Mapa de mandaditos" />
                 </FlexContainer>
             </FlexContainer>

@@ -7,13 +7,12 @@ import Button from '../essentials/Button';
 
 const ContainerGeneral = styled.div`
     width: auto;
-    height: 110px;
     border-radius: 10px;
     border: 1px solid ${(props) => props.theme.colors.lineColor};
     background-color: transparent;
     display: flex;
     flex-direction: row;
-    padding: 10px 10px 0 10px;
+    padding: 8px 10px;
 `;
 
 
@@ -104,7 +103,7 @@ export default function DeliveryCard ({pickUpLocation, deliveryLocation, deliver
                     L. {numericPrice.toFixed(2)}
                     </TextCard>
                 <FlexContainer alignitems="flex-end" justifycontent="flex-end" height="100%">
-                    <Button text={"Ver"} width={"58%"} paddingx={"8px"} paddingy={"4px"} fontSize={"10px"} height="50%" className={"mb-3"} onClick={ActionButton}></Button>
+                    <Button text={"Ver"} width={"58%"} paddingx={"8px"} paddingy={"4px"} fontSize={"10px"} height="50%" onClick={ActionButton}></Button>
                 </FlexContainer>
                 
             </FlexContainer>
