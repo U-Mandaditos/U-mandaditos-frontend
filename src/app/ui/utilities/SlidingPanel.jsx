@@ -47,10 +47,14 @@ export default function ({children, title}){
   const [translateY, setTranslateY] = useState(MaxLimit); // Inicia cerrado
   const startY = useRef(MinLimit); // Guarda la posición inicial del touch
   const currentY = useRef(MaxLimit); // Guarda la posición actual
+  const isDragging = useRef(false);
 
   // Se activa cuando el usuario toca la pantalla
   const handleTouchStart = (e) => {
-    startY.current = e.touches[0].clientY;
+    if (e.target === e.currentTarget || e.target.closest('.drag-handle')) {
+      isDragging.current = true;
+      startY.current = e.touches[0].clientY;
+    }
   };
 
   // Se activa cuando el usuario arrastra el menú
@@ -62,20 +66,26 @@ export default function ({children, title}){
 
   // Se activa cuando el usuario suelta el menú
   const handleTouchEnd = () => {
+    if (!isDragging.current) return;
+    
+    isDragging.current = false;
     const quarter = MaxLimit / 4;
     const half = MaxLimit / 2;
     
-    let newPosition = MaxLimit; // Por defecto, se cierra completamente
-  
+    let newPosition = currentY.current; // Mantiene posición por defecto
+    
     if (translateY < quarter) {
-      newPosition = MinLimit; // Se abre completamente
-    } else if (translateY < half || (translateY > half && translateY < half+quarter)) {
-      newPosition = half; // Se queda en la mitad
+      newPosition = MinLimit;
+    } else if (translateY < half) {
+      newPosition = half;
+    } else if (translateY > half + quarter) {
+      newPosition = MaxLimit;
     }
-  
+    
     setTranslateY(newPosition);
     currentY.current = newPosition;
   };
+
   
 
   return (

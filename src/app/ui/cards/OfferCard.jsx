@@ -92,6 +92,7 @@ export default function OfferCard({
 }) {
   const starsFilled = postUser.stars;
   const starsEmpty = 5 - starsFilled;
+  const numericPrice = parseFloat(priceSuggested);
 
   return (
     <OfferCardContainer isselected={isSelected} onClick={onClick}>
@@ -123,7 +124,7 @@ export default function OfferCard({
       <OfferContainer>
         <PriceContainer>
           <PriceOffered>L. {offerInfo.priceOffered}</PriceOffered>
-          <PriceSuggested>L. {priceSuggested}</PriceSuggested>
+          <PriceSuggested>L. {numericPrice.toFixed(2)}</PriceSuggested>
         </PriceContainer>
         <HourContainer>{offerInfo.hour}</HourContainer>
       </OfferContainer>

@@ -67,6 +67,7 @@ const SecondContainer = styled.div`
 
 export default function ActionDeliveryCard ({idDelivery, pickUpLocation, deliveryLocation, deliveryHour, deliveryTitle, posterName, price, isSelected, onClick, action }) {
     const theme = useTheme();
+    const numericPrice = parseFloat(price);
     return (
         <>
             <OutContainer onClick={onClick}>
@@ -95,7 +96,7 @@ export default function ActionDeliveryCard ({idDelivery, pickUpLocation, deliver
 
                     </FlexContainer>
                     <FlexContainer direction="column" alignitems="flex-start" gap="3px" width="auto">
-                        <TextCard color={theme.colors.foreground} weight="500" size="16px">{`L ${price} `}</TextCard>
+                        <TextCard color={theme.colors.foreground} weight="500" size="16px">L {numericPrice.toFixed(2)}</TextCard>
                         <TextCard color={theme.colors.secondaryText} weight="400" size="12px">{deliveryHour}</TextCard>
                     </FlexContainer>
 

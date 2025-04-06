@@ -115,7 +115,7 @@ export default function MandaditoNuevo() {
 
     const onCloseModal = (success) => {
         setIsOpenPopup(false);
-        if (success==true) {
+        if (success==false) {
             router.push('/dashboard/home')
         }
 

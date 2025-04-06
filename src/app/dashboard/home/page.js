@@ -180,7 +180,7 @@ export default function Home() {
                 
                 <FlexContainer direction="column" gap="5px">
                     <Title text="Encuentra mandaditos cerca de ti" weight="450" size="20px" className="mb-2"/>
-                    <img src="/img/img-map.png" alt="Mapa de mandaditos" />
+                    <img src="/img/img-map.png" alt="Mapa de mandaditos" onClick={() => {router.push("/dashboard/mandaditos/search")}}/>
                 </FlexContainer>
             </FlexContainer>
         </>
