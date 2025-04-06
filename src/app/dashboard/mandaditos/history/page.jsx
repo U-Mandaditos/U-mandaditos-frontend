@@ -126,7 +126,7 @@ export default function Page() {
     return (
         <>
         <Header router={router} text={"Tus mandaditos"} />
-        <DeliveryListByDate data={history} />
+        <DeliveryListByDate data={history} router={router} />
         </>
     )
 }
