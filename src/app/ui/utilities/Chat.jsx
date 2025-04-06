@@ -50,7 +50,7 @@ export default function Chat({mandaditoId, senderUserId}){
 
 
     return (
-      <FlexContainer direction="column" justifycontent="space-between" height="100%">
+      <FlexContainer direction="column" justifycontent="space-between" style={{ height: '100%', flex: 1, overflow: 'auto' }}>
         <FlexContainer direction="column" gap="10px">
             {messages.map((message, index)=>(<ChatMessage key={index} text={message.text} hour={message.timestamp.toLocaleString()} isMine={message.senderId === senderUserId}></ChatMessage>))}
         </FlexContainer>
