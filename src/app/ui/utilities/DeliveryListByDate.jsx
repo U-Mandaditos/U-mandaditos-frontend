@@ -4,7 +4,7 @@ import DeliveryCard from "../cards/DeliveryCard";
 import Title from "../essentials/Title";
 
 
-export default function DeliveryListByDate({ data }) {
+export default function DeliveryListByDate({ data, router }) {
     return (
         <FlexContainer direction="column" gap="15px" className="p-4">
             {data.map((dateGroup) => {
@@ -30,6 +30,7 @@ export default function DeliveryListByDate({ data }) {
                                     runnerName={""} // No está en los datos, puedes ajustarlo
                                     status={delivery.status}
                                     price={`${delivery.acceptedRate}`}
+                                    ActionButton={()=>{router.push(`/dashboard/mandaditos/history/detail/${delivery.id}`)}}
                                 />
                             ))}
                         </FlexContainer>
