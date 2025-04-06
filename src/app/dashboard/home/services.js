@@ -52,4 +52,26 @@ const getPosts = async(token)=>{
     }
 }
 
-export { getUser, getLocations, getPosts}
+const getPostsByRuner = async(token)=>{
+    try {
+        const response = await fetch(`${API_URL}/api/mandadito/runner/`, {
+            method: "GET",
+            headers: {"Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) {
+            throw new Error(`Error en la petición: ${response.statusText}`);
+        }
+        const dt = await response.json();
+
+        if(dt.success) {
+            return dt.data;
+        }
+
+        return [];
+
+    } catch (error) {
+        console.error("Error en fetchData:", error);
+    }
+}
+
+export { getUser, getLocations, getPosts, getPostsByRuner };

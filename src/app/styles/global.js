@@ -27,6 +27,10 @@ export const GlobalStyle = createGlobalStyle`
   margin-right: auto;
 }
 
+.center {
+  margin: 0 auto;
+}
+
 .w-full {
   width: 100%;
 }

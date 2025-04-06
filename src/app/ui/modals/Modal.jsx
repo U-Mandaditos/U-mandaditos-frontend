@@ -27,7 +27,7 @@ const Backdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 100;
   opacity: ${({ $isVisible }) => ($isVisible ? 1 : 0)};
   visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -60,12 +60,12 @@ const CloseButton = styled.button`
   }
 `;
 
-export default function Modal({ children, isOpen, onClose, title, subtitle}){
+export default function Modal({ children, isOpen, onClose, title, subtitle, showClose = true }) {
   return (
     <Backdrop $isVisible={isOpen} onClick={onClose}>
       <ModalContainer $isVisible={isOpen} onClick={(e) => e.stopPropagation()}>
 
-        <CloseButton onClick={onClose}>✕</CloseButton>
+        {showClose && <CloseButton onClick={onClose}>✕</CloseButton>}
 
         {title && <Title text={title} />}
 

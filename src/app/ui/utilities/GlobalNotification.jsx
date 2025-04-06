@@ -81,11 +81,11 @@ export default function GlobalNotification({ message, type = 'info', duration = 
       setVisible(true);
       const timer = setTimeout(() => {
         setVisible(false);
-        setTimeout(onClose, 300);
+        setTimeout(() => {}, 300);
       }, 4000);
       return () => clearTimeout(timer);
     }
-  }, [message, onClose]);
+  }, [message]);
 
   if (!message) return null;
 
