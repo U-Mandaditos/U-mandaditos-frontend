@@ -33,7 +33,9 @@ jobs:
         Write-Host "Building $imageName"
         
         # Construir la imagen Docker
-        docker build --no-cache -t $imageName .
+        docker build --no-cache \
+        --build-arg API_URL=${{ vars.API_URL }} \
+        -t $imageName .
 
     - name: Push Docker image to GitHub Container Registry
       run: |
