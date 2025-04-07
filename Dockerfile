@@ -1,6 +1,9 @@
 # Etapa 1: Construcción
 FROM node:18-alpine AS builder
 
+# Declarar el argumento de construcción
+ARG API_URL=http://domain:8080
+
 # Establecer directorio de trabajo
 WORKDIR /app
 
@@ -15,7 +18,7 @@ COPY . .
 
 # Crear el archivo de configuración necesario
 RUN mkdir -p ./src/app/utils && \
-    echo "export const API_URL = '${API_URL}';" > ./src/app/utils/settings.js
+    echo "export const API_URL = '$API_URL';" > ./src/app/utils/settings.js
 
 # Construir la aplicación
 RUN npm run build

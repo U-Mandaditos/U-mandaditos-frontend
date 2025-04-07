@@ -32,10 +32,13 @@ jobs:
         # Construir el nombre de la imagen
         $imageName = "ghcr.io/$repo/ui:dev"
         Write-Host "Building $imageName"
+
+        # Se obtiene variable apiurl
+        $apiurl = "${{ vars.API_URL }}"
         
         # Construir la imagen Docker
         docker build --no-cache `
-        --build-arg API_URL=${{ vars.API_URL }} `
+        --build-arg API_URL=$apiurl `
         -t $imageName .
 
     - name: Push Docker image to GitHub Container Registry
