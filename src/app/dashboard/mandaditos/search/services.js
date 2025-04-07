@@ -45,3 +45,18 @@ export const createOffer = async (offerData, token) => {
         console.error("Error en fetchData:", error);
     }
 }
+
+export const cancelOffer = async (offerId, token) => {
+    try {
+        const response = await fetch(`${API_URL}/api/offers/delete/${offerId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+        });
+        if (!response.ok) {
+            throw new Error(`Error en la petición: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error en fetchData:", error);
+    }
+}

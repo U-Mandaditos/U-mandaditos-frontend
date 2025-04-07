@@ -8,14 +8,14 @@ import Paragraph from "@/app/ui/essentials/Paragraph";
 import Title from "@/app/ui/essentials/Title";
 import SlidingPanel from "@/app/ui/utilities/SlidingPanel";
 import LoadingBar from "@/app/ui/ux/LoadingBar";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
-import { createOffer, getLocations, getNearPosts } from "./services";
+import { cancelOffer, createOffer, getLocations, getNearPosts } from "./services";
 import Map from "@/app/ui/maps/Map";
 import { Marker } from "@react-google-maps/api";
 import { LoaderSpin } from "@/app/ui/ux/LoadingSpin";
 import StatusPopUp from "@/app/ui/modals/StatusPopUp";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { connectSignalR } from "./signalrService";
 import Image from "next/image";
 
@@ -37,6 +37,7 @@ export default function Page(){
     const [isCounterOffer, setIsCounterOffer] = useState(false);
     const [socketConnection, setSocketConnection] = useState(null);
     const [isAccepted, setIsAccepted] = useState(false);
+    const [offerId, setOfferId] = useState(0);
 
     //Data
     const [locations, setLocations] = useState([]);
@@ -123,6 +124,8 @@ export default function Page(){
                 isSuccess: success,
                 message: message
             })
+            setOfferId(offer.id);
+            console.log(offerId);
             setIsOpenPopup(true);
             setStep(2); //Se pasa al paso de espera
 
@@ -164,7 +167,45 @@ export default function Page(){
         setPrice(postSelected.suggestedValue);
         console.log(price);
         await handleSubmit();
-    }
+    };
+
+    const cancelRequest =  async () => {
+        setErrorMessage("");
+        
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/login') //El usuario no esta autenticado
+            return;
+        }
+        //Peticion al Backend
+        try {
+
+        const {success, message}  = await cancelOffer(offerId, token);
+
+        if (success==true) {
+
+            setResponsePopup({
+                title: "Acción Exitosa",
+                subtitle: "Se ha realizado la acción de forma satisfactoria",
+                isSuccess: success,
+                message: message
+            })
+            setIsOpenPopup(true);
+            router.push("/dashboard/home");
+
+        }else{
+            setResponsePopup({
+                title: "Acción Fallida",
+                subtitle: "NO se ha realizado la acción de forma satisfactoria",
+                isSuccess: success,
+                message: message
+            })
+            setIsOpenPopup(true);
+        }
+        } catch (error) {
+            setErrorMessage(error.message || "Error al cancelar oferta. Intentalo de nuevo")
+        }
+    };
 
     const renderSteps = {
         0: (<FlexContainer direction="column" gap="20px">
@@ -245,10 +286,6 @@ export default function Page(){
             router.push('/dashboard/home')
         }
 
-    }
-
-    const cancelRequest = () => {
-        router.push('/dashboard/home')
     }
 
     return (
