@@ -29,7 +29,7 @@ jobs:
         $repo = "${{ github.repository }}".ToLower()
         
         # Construir el nombre de la imagen
-        $imageName = "ghcr.io/$repo/api:dev"
+        $imageName = "ghcr.io/$repo/ui:dev"
         Write-Host "Building $imageName"
         
         # Construir la imagen Docker
@@ -43,7 +43,7 @@ jobs:
         $repo = "${{ github.repository }}".ToLower()
 
         # Construir el nombre de la imagen
-        $imageName = "ghcr.io/$repo/api:dev"
+        $imageName = "ghcr.io/$repo/ui:dev"
         
         # Empujar la imagen Docker al registro de GitHub
         docker push $imageName

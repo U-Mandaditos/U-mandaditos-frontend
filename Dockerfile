@@ -15,7 +15,7 @@ COPY . .
 
 # Crear el archivo de configuración necesario
 RUN mkdir -p ./app/utils && \
-    echo "export const API_URL = 'http://localhost:9090';" > ./app/utils/settings.js
+    echo "export const API_URL = '${API_URL}';" > ./app/utils/settings.js
 
 # Construir la aplicación
 RUN npm run build
