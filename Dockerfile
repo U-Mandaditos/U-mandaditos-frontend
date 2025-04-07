@@ -14,8 +14,8 @@ RUN npm install
 COPY . .
 
 # Crear el archivo de configuración necesario
-RUN mkdir -p ./app/utils && \
-    echo "export const API_URL = '${API_URL}';" > ./app/utils/settings.js
+RUN mkdir -p ./src/app/utils && \
+    echo "export const API_URL = '${API_URL}';" > ./src/app/utils/settings.js
 
 # Construir la aplicación
 RUN npm run build
