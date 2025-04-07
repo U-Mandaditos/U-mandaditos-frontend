@@ -18,6 +18,8 @@ import LoadingSpinner from "@/app/ui/essentials/Loader";
 import { fetchWithAuth } from "@/app/utils/fetchWithAuth";
 import SlidingPanel from "@/app/ui/utilities/SlidingPanel";
 import Chat from "@/app/ui/utilities/Chat";
+import { WaitingForMandados } from "@/app/ui/utilities/LoadinOffers";
+import { useNotification } from "@/app/contexts/NotificationContext";
 
 const PageContainer = styled.div`
   padding: 20px;
@@ -46,6 +48,7 @@ export default function Mandadito({ params }) {
   const [offerSelected, setOfferSelected] = useState(null);
   const [showChat, setShowChat] = useState(false);
   const [mandaditoId, setMandaditoId] = useState(null);
+  const { notify } = useNotification();
 
   const theme = useTheme();
   const router = useRouter();
@@ -151,8 +154,7 @@ export default function Mandadito({ params }) {
         accepted: data.accepted,
       });
     } catch (error) {
-      console.error(error);
-      setError("Error fetching mandadito: " + error.message);
+      notify("Lo sentimos algo inesperado ha ocurrido", "error", 3000);
     } finally {
       setLoading(false);
     }
@@ -189,7 +191,6 @@ export default function Mandadito({ params }) {
       setOffers(formattedOffers);
     } catch (error) {
       console.error(error);
-      setError("Error fetching offers: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -239,7 +240,11 @@ export default function Mandadito({ params }) {
       setShowChat(true);
     } catch (error) {
       console.error(error);
-      setError("Error accepting offer: " + error.message);
+      notify(
+        "Lo sentimos algo inesperado ha ocurrido, intenta más tarde",
+        "error",
+        3000
+      );
     } finally {
       setLoading(false);
     }
@@ -317,7 +322,9 @@ export default function Mandadito({ params }) {
 
               <SlidingPanel
                 title={
-                  accepted || showChat ? "Ponte en contacto con tu runner" : "Acepta una oferta"
+                  accepted || showChat
+                    ? "Ponte en contacto con tu runner"
+                    : "Acepta una oferta"
                 }
               >
                 {(accepted || showChat) && idUser ? (
@@ -338,12 +345,7 @@ export default function Mandadito({ params }) {
                         />
                       ))
                     ) : (
-                      <Paragraph
-                        text="No hay ofertas disponibles"
-                        weight={400}
-                        color={theme.colors.secondaryText}
-                        className="ml-3"
-                      />
+                      <WaitingForMandados />
                     )}
 
                     {offerSelected && (

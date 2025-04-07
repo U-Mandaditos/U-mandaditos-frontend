@@ -3,7 +3,6 @@ import Button from "@/app/ui/essentials/Button";
 import { FlexContainer } from "@/app/ui/essentials/FlexBox";
 import Paragraph from "@/app/ui/essentials/Paragraph";
 import Title from "@/app/ui/essentials/Title";
-import Header from "@/app/ui/utilities/Header";
 import LocationSelect from "@/app/ui/utilities/LocationSelect";
 import { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
@@ -11,6 +10,8 @@ import Image from "/public/img/image-home.svg";
 import DeliveryCard from "@/app/ui/cards/DeliveryCard";
 import { getLocations, getPosts, getUser, getPostsByRuner } from "./services";
 import { useRouter } from "next/navigation";
+import DeliveryCardSkeleton from "@/app/ui/skeletons/DeliveryCardSkeleton";
+import NoDeliveries from "@/app/ui/utilities/NoMandaditos";
 
 const UserImage = styled.img`
   width: 43px;
@@ -79,6 +80,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [postRunner, setPostRunner] = useState([]);
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   const navigate = (id) => {
@@ -105,19 +107,10 @@ export default function Home() {
       console.log("token", token);
 
       try {
-        console.log("fetching user data");
-
         const response = await getUser(token);
-        console.log("response", response);
-
         const location = await getLocations(token);
-        console.log("location", location);
-
         const post = await getPosts(token);
-        console.log("post", post);
-
         const postRunner = await getPostsByRuner(token);
-        console.log("postRunner", postRunner);
 
         if (response) {
           const fullName = response.data.name || "";
@@ -137,8 +130,9 @@ export default function Home() {
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        // Opcional: redirigir a login si hay error
         router.push("/login");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -156,13 +150,15 @@ export default function Home() {
               color={theme.colors.secondaryText}
             />
           </FlexContainer>
-          <UserImage
-            onClick={() => {
-              router.push("/dashboard/profile");
-            }}
-            src={user.profilePic || dataa.userImage}
-            alt="Foto de perfil"
-          />
+          {!loading && (
+            <UserImage
+              onClick={() => {
+                router.push("/dashboard/profile");
+              }}
+              src={user.profilePic || dataa.userImage}
+              alt="Foto de perfil"
+            />
+          )}
         </FlexContainer>
 
         <LocationSelect
@@ -202,13 +198,10 @@ export default function Home() {
             size="20px"
             className="mb-2"
           />
-          {posts.length === 0 ? (
-            <Paragraph
-              text="No tienes mandaditos en curso"
-              size="12px"
-              color={theme.colors.secondaryText}
-              className="text-center"
-            />
+          {loading ? (
+            <DeliveryCardSkeleton />
+          ) : posts.length === 0 ? (
+            <NoDeliveries />
           ) : (
             posts.map((delivery) => (
               <DeliveryCard
@@ -233,13 +226,10 @@ export default function Home() {
             size="20px"
             className="mb-2"
           />
-          {postRunner.length === 0 ? (
-            <Paragraph
-              text="No tienes mandaditos en curso"
-              size="12px"
-              color={theme.colors.secondaryText}
-              className="text-center"
-            />
+          {loading ? (
+            <DeliveryCardSkeleton />
+          ) : postRunner.length === 0 ? (
+            <NoDeliveries />
           ) : (
             postRunner.map((delivery) => (
               <DeliveryCard
