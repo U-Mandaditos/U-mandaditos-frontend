@@ -68,7 +68,7 @@ export default function Page() {
             const data = await res.json();
             return data.ip;
         } catch (err) {
-            console.error("No se pudo obtener la IP:", err);
+            console.error("No se pudo obtener la dirección IP:", err);
             return "0.0.0.0"; 
         }
     };
