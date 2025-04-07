@@ -78,6 +78,7 @@ export default function Page() {
 
   const fetchCareers = async () => {
     try {
+      console.log(API_URL);
       const response = await fetch(`${API_URL}/api/careers`, {
         method: "GET",
         headers: {
