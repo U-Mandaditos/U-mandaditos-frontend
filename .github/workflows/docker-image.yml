@@ -1,0 +1,47 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: self-hosted  # Usar runner self-hosted
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build and tag Docker image
+      run: |
+        # Obtener el nombre del repositorio dinámicamente
+        $repo = "${{ github.repository }}".ToLower()
+        
+        # Construir el nombre de la imagen
+        $imageName = "ghcr.io/$repo/api:dev"
+        Write-Host "Building $imageName"
+        
+        # Construir la imagen Docker
+        docker build --no-cache -t $imageName .
+
+    - name: Push Docker image to GitHub Container Registry
+      run: |
+        # Obtener el nombre del repositorio dinámicamente
+        $repo = "${{ github.repository }}".ToLower()
+
+        # Construir el nombre de la imagen
+        $imageName = "ghcr.io/$repo/api:dev"
+        
+        # Empujar la imagen Docker al registro de GitHub
+        docker push $imageName
