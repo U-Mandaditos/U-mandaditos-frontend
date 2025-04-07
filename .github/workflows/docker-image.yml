@@ -35,10 +35,12 @@ jobs:
 
         # Se obtiene variable apiurl
         $apiurl = "${{ vars.API_URL }}"
+        $env = "${{ vars.ENV_FILE }}"
         
         # Construir la imagen Docker
         docker build --no-cache `
         --build-arg API_URL=$apiurl `
+        --build-arg ENV_FILE=$env `
         -t $imageName .
 
     - name: Push Docker image to GitHub Container Registry

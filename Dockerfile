@@ -3,6 +3,7 @@ FROM node:18-alpine AS builder
 
 # Declarar el argumento de construcción
 ARG API_URL=http://domain:8080
+ARG ENV_FILE=DEFAULT_VALUE
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -19,6 +20,9 @@ COPY . .
 # Crear el archivo de configuración necesario
 RUN mkdir -p ./src/app/utils && \
     echo "export const API_URL = '$API_URL';" > ./src/app/utils/settings.js
+
+# Crea el archivo con las variables de entorno
+RUN echo "$ENV_FILE" > ./.env.production
 
 # Construir la aplicación
 RUN npm run build
